@@ -1,0 +1,254 @@
+
+@media(max-width: 768px) {
+    .container{
+
+        width: 315px;
+    }
+    .now{
+      display: none;
+    }
+    .playing{
+      display: none;
+    }
+    .now-playing2{
+      display: none;
+    }
+
+    .img-album{
+      padding-bottom: 14px;
+    }
+    
+}
+
+@media(min-width: 1040px) {
+
+  .img-album{
+    padding-top: 14px;
+  }
+  
+}
+
+@media(min-width: 768px) {
+    .container{
+
+        width: 315px;
+       
+    }
+
+
+    .now-playing{
+      display: flex;
+      font-size: 70px;
+      font-weight: 700;
+      align-items: center;
+    }
+
+    
+ 
+}
+
+  
+.container {
+  background: #1ed760;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 355px;
+  overflow: hidden;
+  position: relative;
+}
+
+.content {
+  text-align: center;
+  color: #fff;
+  font-family: system-ui;
+  text-align: center;
+  z-index: 1;
+}
+
+.img-album {
+  // padding-bottom: 14px;
+  height: 100px;
+  width: 100px;
+}
+
+.info {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-family: system-ui;
+  flex-direction: column;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.info .track-name-recently,
+.info .artist-name-recently {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 270px; /* Adjust the max-width value to your desired width */
+}
+
+.info p {
+  margin: 5px 0;
+}
+
+.spotify-icon-recently{
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+
+.fiCamera-playing {
+  font-size: 15px;
+  color: white;
+  font-weight: 700;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+
+
+.statify {
+  font-size: 12px;
+  color: black;
+  font-weight: 700;
+}
+
+
+
+
+  .container::after {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50px;
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    border-radius: 20px;
+  }
+  
+ 
+  .content h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .content p {
+    margin: 0;
+  }
+
+  
+  
+  .box {
+    --delay: 0.1s;
+    animation: grow 10s linear infinite;
+    animation-delay: var(--delay);
+    background: black;
+    height: 100px;
+    opacity: 0.5;
+    position: absolute;
+    width: 100px;
+  }
+  .box:nth-child(2) {
+    --delay: 2s;
+  }
+  .box:nth-child(3) {
+    --delay: 3s;
+  }
+  .box:nth-child(4) {
+    --delay: 4s;
+  }
+  .box:nth-child(5) {
+    --delay: 5s;
+  }
+  .box:nth-child(6) {
+    --delay: 6s;
+  }
+  .box:nth-child(7) {
+    --delay: 7s;
+  }
+  .box:nth-child(8) {
+    --delay: 8s;
+  }
+  .box:nth-child(9) {
+    --delay: 9s;
+  }
+  .box:nth-child(10) {
+    --delay: 10s;
+  }
+  
+  @keyframes grow {
+    from {
+      opacity: 0.5;
+      transform: scale(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(3.85);
+    }
+  }
+
+  .return-div{
+    display: flex;
+  
+    justify-content: center;
+  }
+
+  
+
+  .track-name-recently{
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .artist-name-recently{
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+ 
+
+  
+  .fiCamera-playing.hidden {
+    display: none;
+  }
+  
+  
+
+  /* Add the following CSS rules */
+
+/* Adjust the size of control buttons for the desktop view */
+.controls {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.control-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.control-icon-small {
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+
+
+.icons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 10px;
+  margin: auto;
+  
+}
+

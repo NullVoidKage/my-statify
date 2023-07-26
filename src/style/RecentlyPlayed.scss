@@ -1,0 +1,202 @@
+.recent-tracks-container {
+    text-align: center;
+    padding: 0; // Adjust the value as needed
+
+  }
+  
+
+  
+  .recent-tracks-button {
+    padding: 10px 20px;
+    background-color: #1ed760;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+  .recent-tracks-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    // padding: 30px;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  
+  .recent-track-item-played {
+    display: flex;
+    align-items: center;
+    background-color: #2b2730;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .recent-track-number {
+    color: white;
+    font-weight: 200;
+    margin-right: 8px;
+  }
+  
+  .recent-track-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .recent-track-info {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .recent-track-name {
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  
+  .recent-track-artists {
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  
+  
+  .add-to-queue-icon {
+    // margin-left: auto;
+    color: #1ed760;
+    font-size: 18px;
+    padding-left: 4px;
+  }
+  
+  
+
+/* CSS */
+.create-playlist-recent {
+  appearance: none;
+  backface-visibility: hidden;
+  background-color: #27ae60;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.5;
+  outline: none;
+  overflow: hidden;
+  padding: 13px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.create-playlist-recent:hover {
+  background-color: #1e8449;
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: .35s;
+}
+
+.create-playlist-recent:active {
+  transform: translateY(2px);
+  transition-duration: .35s;
+}
+
+.create-playlist-recent:hover {
+  box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
+}
+  
+  .recent-track-image {
+    width: 60px;
+    height: 60px;
+  
+  }
+  
+  // .recent-track-info {
+  //   text-align: left;
+  //   margin-left: 10px;
+    
+  // }
+  
+  .recent-track-name {
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  .recent-track-artists {
+    font-size: 13px;
+    font-weight: 300;
+  }
+  
+  .recent-tracks-close-button {
+    padding: 10px 20px;
+    background-color: #ccc;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+
+  .toggle-icon{
+    font-size: 40px;
+  }
+
+  @media (max-width: 768px) {
+
+    .toggle-icon{
+        font-size: 30px;
+      }
+      
+      .recent-track-item-played{
+        margin: 1%;
+
+      }
+
+  }
+
+  .recent-tracks-heading {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1ed760;
+  }
+
+  .added-to-queue-icon-container{
+    display: flex;
+    // justify-content: center;
+    justify-content: flex-end;
+
+    align-items: center;
+  }
+
+  .liked-icon-recently{
+    color:#1ed760;
+  }

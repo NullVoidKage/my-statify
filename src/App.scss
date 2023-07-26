@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
+
+
+.App-header {
+  min-height: 100vh; /* Adjust the value as needed */
+  background-size: cover;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  display: flex;
+  gap: 20px; 
+  background: linear-gradient(to bottom, #2B2730, #000000);
+}
+
+#wrap {
+  text-align: center; 
+  z-index: 10;
+}
+
+.welcome-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 108px;
+}
+
+.welcome {
+  text-align: center;
+  font-size: 24px;
+}
+
+.welcome-chart {
+  color: #1ED760;
+  font-size: 36px;
+  margin-left: 8px; /* Adjust the spacing between "Welcome to" and "MySpotiChart" */
+  /* Add any additional styles as desired */
+}
+
+
+h1 {
+  position: relative;
+  color: #fff;
+  font-size: 50px;
+  letter-spacing: 1.5px;
+  padding: 70px 0px 30px;
+}
+
+p {
+  font-family: 'Nunito Sans';
+  font-size: 24px;
+  color: #fff;
+}
+
+.fa { 
+  font-size: 19px; 
+  width: 20px; 
+}
+
+.btn-slide { 
+  position: relative;
+  display: inline-block; 
+  height: 100px;
+  width: 260px;
+  line-height: 100px;
+  margin: 25px 0;
+  padding: 0px;
+  border-radius: 25px;
+  box-shadow: 0 1px 14px -1px rgba(0, 0, 0, 0.7);
+  
+}
+
+.btn-slide:active { 
+  box-shadow: 0 8px 16px -8px rgba(0, 0, 0,0.7);
+  -webkit-transform: scale(0.98);
+  transform: scale(0.96); 
+}
+
+
+.btn-slide span.circle { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e570e7;
+  position: absolute;
+  margin: 5px;
+  height: 90px; 
+  width: 40px;
+  top: 0; left: 0;
+  border-radius: 50%;
+  transition: all 1.5s ease;
+}
+
+.btn-slide span.circle i { 
+  font-size: 36px;
+  color: #1DB954;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-slide:hover span.circle { 
+  left: 100%;
+  margin-left: -45px;
+  color: #79f1fc; 
+}
+
+.btn-slide span.title { 
+  font-family: 'Nunito Sans';
+  position: absolute;
+  left: 65px;
+  font-size: 23px;
+  letter-spacing: 1px;
+  color: #1ED760;
+  transition: all 1.5s linear; 
+}
+
+.btn-slide span.title-hover { 
+  opacity: 0;
+}
+
+.btn-slide:hover span.title { 
+  opacity: 0; 
+}
+
+.btn-slide:hover span.title-hover { 
+  opacity: 1; 
+  left: 28px; 
+}   
+
+@media (max-width: 540px) {
+  h1 { 
+    font-size: 36px; 
+  }
+  
+  p { 
+    font-size: 20px; 
+  }
+
+  .btn-slide {
+    height: 60px;
+    width: 180px;
+    line-height: 60px;
+  }
+
+  .btn-slide span.circle {
+    height: 50px;
+    width: 30px;
+  }
+  
+  .btn-slide span.title {
+    left: 50px;
+    font-size: 15px;
+  }
+
+}
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+
+
+.App-link {
+  color: #343037;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.footer-text a{
+  font-family: "Nunito Sans";
+  font-size: 15px;
+  color: white;
+}
+
+.footer-title{
+  color:#1ED760; 
+}

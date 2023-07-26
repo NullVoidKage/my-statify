@@ -1,0 +1,47 @@
+
+  
+.spotichart-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 0 20px; /* Add margin to create a gap on the left and right */
+  }
+  
+  .card {
+    
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 1px 14px -1px rgba(0, 0, 0, 0.7);
+
+  }
+  
+  @media (max-width: 767px) {
+    .spotichart-card {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .spotichart-card {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+  }
+  
+  
+  
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    
+    }
+  
+  .card-description {
+    font-size: 16px;
+    color: #FFECEC;
+  }
+
+  .card-icon{
+    font-size: 25px;
+    color:#1ED760; 
+  }
+ 

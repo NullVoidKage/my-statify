@@ -1,0 +1,334 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+
+.card-container {
+  padding-top: 30px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+
+}
+
+
+.profile-data{
+  display: flex;
+  justify-content: center;
+  .followers-header{
+    display: flex;
+    align-items: center;
+    font-weight: 200;
+    justify-content: center;
+    font-size: 15px;
+    .followers-sd{
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      padding-left: 3px;
+    }
+  }
+
+  .following-header{
+    display: flex;
+    align-items: center;
+    font-weight: 200;
+    justify-content: center;
+    padding-left: 4px;
+    font-size: 15px;
+    .following-sd{
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      padding-left: 3px;
+    }
+  }
+  .country-header{
+    padding-left: 4px;
+    display: flex;
+    font-weight: 200;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    .country-sd {
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      padding-left: 3px;
+    }
+  }
+
+ 
+}
+
+.card-container .pro {
+  // color: #231E39;
+  background-color: #1e8449;
+  // border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  padding: 3px 7px;
+  position: absolute;
+  top: 30px;
+  // left: 4px;
+}
+
+.ify-card {
+  font-weight: 800;
+}
+.card-container .round {
+  border: 1px solid white;
+  border-radius: 50%;
+  height: 120px;
+  padding: 7px;
+
+  @media (max-width: 768px) {
+    height: 120px;
+    width: 120px;
+  }
+}
+
+button.primary {
+  background-color: #03bfcb;
+  border: 1px solid #03bfcb;
+  border-radius: 3px;
+  color: #231e39;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  padding: 10px 25px;
+}
+
+button.primary.ghost {
+  background-color: transparent;
+  color: #02899c;
+}
+
+.skills {
+  background-color: #1f1a36;
+  text-align: left;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+.skills ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skills ul li {
+  border: 1px solid #2d2747;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 12px;
+  margin: 0 7px 7px 0;
+  padding: 7px;
+}
+
+.music-personality {
+  padding-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.name-sdata {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.personality-value {
+  font-size: 14px;
+  // color: #888888;
+  font-weight: 200;
+}
+.mood {
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+.w-mood {
+  font-weight: 500;
+  font-size: 16px;
+}
+.m-message {
+  font-size: 14px;
+  font-weight: 200;
+
+  // color: #888888;
+}
+
+.open-modal-button {
+  font-size: 15px;
+  font-weight: 700;
+  align-items: center;
+  display: flex;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+  color: #ffffff;
+  svg{
+    color: #1db954;
+    cursor: pointer;
+    padding-left: 4px;
+  }
+}
+
+/* Add CSS styles for the modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto; /* Add scroll if the content exceeds the height */
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  span{
+    cursor: pointer;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .modal-content{
+    background-color: #1c1c1c;
+    bottom: 0;
+    color: #fff;
+    padding: 30px;
+    position: relative;
+    width: 250px;
+    text-align: center;
+  }
+  
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.close-button:hover {
+  color: #fff;
+}
+@media (min-width: 768px) {
+  .close-button {
+    top: 10px;
+  }
+}
+/* Add any other necessary styles for the card content inside the modal */
+.content-data {
+  font-size: 18px;
+  text-align: left;
+}
+
+/* StatifyData.scss */
+// Your existing styles...
+
+.profile-description {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  // color: #555;
+}
+
+/* Add any additional styles as needed */
+
+.top-value {
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.top-label {
+  // color: #1db954;
+  font-weight: 500;
+  font-size: 16px;
+}
+.top-album {
+  padding-top: 9px;
+}
+
+// .top-track {
+//   padding-top: 10px;
+
+// }
+
+// .top-artist {
+//   padding-top: 10px;
+
+// }
+
+// .top-genre {
+//   padding-top: 10px;
+
+// }
+
+.spotify-container {
+  display: flex;
+  align-items: center;
+  svg {
+    color: #1db954;
+  }
+}
+
+.spotify-data-icon {
+  color: #1db954;
+  font-size: 12px;
+  font-weight: 700;
+  padding-left: 5px;
+}
+
+.chart-container {
+  display: flex;
+  margin-top: 4px;
+align-items: center;
+  svg {
+    color: #1db954;
+  }
+}
+
+.close-button.hidden{
+  display: none;
+}
+.chart-data-icon {
+  color: #1db954;
+  font-size: 12px;
+  font-weight: 700;
+  padding-left: 5px;
+}
+
+.share-container-data {
+  display: flex;
+  color: #1db954;
+  align-items: center;
+
+  svg{
+    cursor: pointer;
+  }
+
+  .share-data-icon {
+    // color: #1db954;
+    font-size: 12px;
+    font-weight: 700;
+    padding-left: 5px;
+  }
+}
+
+
+.share-container-data.hidden{
+  display: none;
+}
