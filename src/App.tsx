@@ -12,12 +12,12 @@ import TopTracksMenu from "./components/TopTracksMenu";
 import { Navbar } from "./components/NavBar";
 import RecentlyPlayedTracks from "./components/RecentlyPlayed";
 import Spinner from "./components/Spinner";
-import StatifyData from "./components/StatifyData"
+import StatifyData from "./components/StatifyData";
 
 function App() {
   const CLIENT_ID = "5b065bd3914a4865a90c0aed3e537510";
-  // const REDIRECT_URI = "http://localhost:3000/"; 
-  const REDIRECT_URI = "https://my-statify.vercel.app/callback"; 
+  // const REDIRECT_URI = "http://localhost:3000/";
+  const REDIRECT_URI = "https://my-statify.vercel.app/callback";
 
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
@@ -26,13 +26,13 @@ function App() {
     "user-read-currently-playing",
     "user-top-read",
     "user-follow-read",
-    'user-read-recently-played',
-    'user-read-playback-state',
-    "user-read-email", 
+    "user-read-recently-played",
+    "user-read-playback-state",
+    "user-read-email",
     "playlist-modify-public",
     "user-modify-playback-state",
     "playlist-modify-private",
-    "user-library-read"
+    "user-library-read",
   ];
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
@@ -98,13 +98,10 @@ function App() {
         console.log("Error fetching user data:", error);
       }
       setIsLoading(false);
-
     };
 
     if (token) {
       fetchUserData();
-     
-
     }
   }, [token]);
 
@@ -113,12 +110,10 @@ function App() {
     setUserName(null);
     window.localStorage.removeItem("token");
     document.title = `My Statify`;
-
   };
 
-  console.log(logout)
-      console.log(token);
-
+  console.log(logout);
+  console.log(token);
 
   const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${AUTH_SCOPES.join(
     "%20"
@@ -126,9 +121,8 @@ function App() {
 
   return (
     <div className="App">
-      
       <header className="App-header">
-      <Navbar
+        <Navbar
           userName={userName}
           onLogout={logout}
           userProfilePic={userPhoto}
@@ -163,9 +157,8 @@ function App() {
                   url={url}
                 />
 
-                  {/* <RecentlyPlayedTracks token={token}/>
-                  <TopTracksMenu token={token}/> */}
-           
+                <RecentlyPlayedTracks token={token} />
+                <TopTracksMenu token={token} />
               </>
             )}
           </div>
