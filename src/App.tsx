@@ -163,8 +163,8 @@ function App() {
                   url={url}
                 />
 
-                  <RecentlyPlayedTracks token={token}/>
-                  <TopTracksMenu token={token}/>
+                  {/* <RecentlyPlayedTracks token={token}/>
+                  <TopTracksMenu token={token}/> */}
            
               </>
             )}
