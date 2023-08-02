@@ -2,7 +2,7 @@
 
 
 .card-container {
-  padding-top: 30px;
+  // padding-top: 30px;
   position: relative;
   width: 350px;
   max-width: 100%;
@@ -137,7 +137,7 @@ button.primary.ghost {
 }
 
 .personality-value {
-  font-size: 14px;
+  font-size: 13px;
   // color: #888888;
   font-weight: 200;
 }
@@ -150,7 +150,7 @@ button.primary.ghost {
   font-size: 16px;
 }
 .m-message {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 200;
 
   // color: #888888;
@@ -190,7 +190,7 @@ button.primary.ghost {
 .modal-content {
   max-width: 90%;
   max-height: 90%;
-  overflow-y: auto; /* Add scroll if the content exceeds the height */
+  // overflow-y: auto; /* Add scroll if the content exceeds the height */
   background-color: #1c1c1c;
   padding: 20px;
   border-radius: 8px;
@@ -209,7 +209,7 @@ button.primary.ghost {
     color: #fff;
     padding: 30px;
     position: relative;
-    width: 250px;
+    width: 300px;
     text-align: center;
   }
   
@@ -249,7 +249,7 @@ button.primary.ghost {
 /* Add any additional styles as needed */
 
 .top-value {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 200;
 }
 

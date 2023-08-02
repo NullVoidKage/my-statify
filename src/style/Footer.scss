@@ -148,6 +148,9 @@ section {
 
 	width: 400px;
 	padding: 18px;
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .footer-distributed ::-webkit-input-placeholder {

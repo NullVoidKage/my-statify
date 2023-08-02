@@ -5,7 +5,8 @@ import axios from "axios";
 import * as htmlToImage from "html-to-image";
 import { FaSpotify } from "react-icons/fa";
 import { CurrentlyListening } from "./CurrentlyListening";
-import StatifyData from "./StatifyData"
+import StatifyData from "./StatifyData";
+import { fetchLikedSongs } from "../services/StatifyDataService";
 interface MyStatifyProps {
   token: string;
   userName: string | null;
@@ -51,6 +52,8 @@ export function MyStatifyChart({
   const [allTimeMinutesPlayed, setAllTimeMinutesPlayed] = useState<
     number | null
   >(null);
+  const [totalLikedSongs, setTotalLikedSongs] = useState<number | null>(null);
+
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
 
   const [topSongPhoto, setTopSongPhoto] = useState<string | undefined>();
@@ -72,7 +75,7 @@ export function MyStatifyChart({
         );
 
         const minutesPlayed = response.data.items[0]?.duration_ms / 60000 || 0;
-        console.log(minutesPlayed);
+        // console.log(minutesPlayed);
         setAllTimeMinutesPlayed(minutesPlayed);
       } catch (error) {
         console.error("Error fetching all-time minutes played:", error);
@@ -207,9 +210,14 @@ export function MyStatifyChart({
       }
     };
 
+    const fetchLikedSongsData = async () => {
+      const fetchLiked = await fetchLikedSongs(token);
+      setTotalLikedSongs(fetchLiked);
+    };
     if (token) {
       fetchAllTimeMinutesPlayed();
       fetchTopData();
+      fetchLikedSongsData();
     }
   }, [token]);
 
@@ -283,13 +291,22 @@ export function MyStatifyChart({
 
               <div className="country">
                 <span>
+                  Liked Songs <span className="span-space"></span>
+                </span>
+                <div className="country-value">{totalLikedSongs} </div>
+              </div>
+
+              <div className="country">
+                <span>
                   Country <span className="span-space"></span>
                 </span>
                 <div className="country-value">{country} </div>
               </div>
-              <div  className={`bottom-section`}>
-              <div className="spotify-myspotichart" >Open Spotify</div>
-                <FaSpotify className="spotify-profile"
+
+              <div className={`bottom-section`}>
+                <div className="spotify-myspotichart">Open Spotify</div>
+                <FaSpotify
+                  className="spotify-profile"
                   onClick={(e) => {
                     e.preventDefault();
                     if (url) {
@@ -299,28 +316,29 @@ export function MyStatifyChart({
                     }
                   }}
                 />
-               
-                
               </div>
               <div>
-              <StatifyData
-                  token={token} userName={userName} userProfilePic={userPhoto} followers={followers} country={country}/>
-          
+                <StatifyData
+                  token={token}
+                  userName={userName}
+                  userProfilePic={userPhoto}
+                  followers={followers}
+                  country={country}
+                />
               </div>
-           
             </h2>
-        
           </figcaption>
-          
         </figure>
-        <CurrentlyListening token={token}/>
-        
+        <CurrentlyListening token={token} />
       </div>
     );
   }
 
   return (
-    <div className={`parentDiv ${isDownloading ? "is-downloading" : ""}`} ref={domEl}>
+    <div
+      className={`parentDiv ${isDownloading ? "is-downloading" : ""}`}
+      ref={domEl}
+    >
       {error ? <div className="error-message">{error}</div> : profileCard()}
     </div>
   );

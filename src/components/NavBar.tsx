@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "../style/NavBar.scss";
 import { FaChartBar, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Spinner from "./Spinner";
+import { truncateUsername } from "../utils/FuncUtils";
 
 export const Navbar = ({
   userName,
@@ -75,7 +76,7 @@ export const Navbar = ({
           )}
           {userName && !error && (
             <div className="navbar-user" onClick={handleToggleDropdown}>
-              {userName}
+              <div className="navbar-username">{userName}</div>
               {isDropdownOpen ? (
                 <FaChevronUp className="dropdown-icon" />
               ) : (

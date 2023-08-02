@@ -169,4 +169,37 @@ export const fetchLikedSongs = async (token: string) => {
 
 
 
+export const fetchFollowingUsers = async (token: string) => {
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/following?type=artist",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    // console.log("users");
+    // console.log(response);
+    const followingUsers = response.data.artists.items.map(
+      (user: { id: string; name: string }) => ({
+        id: user.id,
+        name: user.name,
+      })
+    );
+
+    // console.log("users");
+    // console.log(followingUsers);
+
+    const followingCount = response.data.artists.total; // Get the total count of following users
+    // console.log("Following Count:", followingCount);
+    return followingCount;
+  } catch (error) {
+    console.error("Error fetching following users:", error);
+    return 0; // Return 0 if there's an error
+  }
+};
+
+
 

@@ -99,9 +99,7 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
         liked: likedTracks[index],
       }));
 
-      console.log(tracksWithLikedStatus)
-  
-      console.log("tracksWithLikedStatus");
+   
       setTopTracks(tracksWithLikedStatus);
     } catch (error) {
       console.log("Error fetching top tracks:", error);

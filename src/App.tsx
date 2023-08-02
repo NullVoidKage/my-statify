@@ -13,11 +13,13 @@ import { Navbar } from "./components/NavBar";
 import RecentlyPlayedTracks from "./components/RecentlyPlayed";
 import Spinner from "./components/Spinner";
 import StatifyData from "./components/StatifyData";
+import { db } from '@vercel/postgres';
+import { response } from "express";
 
 function App() {
   const CLIENT_ID = "5b065bd3914a4865a90c0aed3e537510";
-  // const REDIRECT_URI = "http://localhost:3000/";
-  const REDIRECT_URI = "https://my-statify.vercel.app/callback";
+  const REDIRECT_URI = "http://localhost:3000/";
+  // const REDIRECT_URI = "https://my-statify.vercel.app/callback";
 
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
@@ -62,6 +64,9 @@ function App() {
     setToken(token || null);
   }, []);
 
+ 
+ 
+
   useEffect(() => {
     const fetchUserData = async () => {
       setIsLoading(true); // Set loading state to true
@@ -102,6 +107,7 @@ function App() {
 
     if (token) {
       fetchUserData();
+      
     }
   }, [token]);
 
@@ -111,9 +117,6 @@ function App() {
     window.localStorage.removeItem("token");
     document.title = `My Statify`;
   };
-
-  console.log(logout);
-  console.log(token);
 
   const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${AUTH_SCOPES.join(
     "%20"
@@ -157,8 +160,8 @@ function App() {
                   url={url}
                 />
 
-                <RecentlyPlayedTracks token={token} />
-                <TopTracksMenu token={token} />
+                {/* <RecentlyPlayedTracks token={token} /> */}
+                {/* <TopTracksMenu token={token} /> */}
               </>
             )}
           </div>

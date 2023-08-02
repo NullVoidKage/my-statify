@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "../style/StatifyData.scss";
-// StatifyData.tsx
 import { FaSpotify, FaChartBar, FaShare, FaCameraRetro, FaUser } from "react-icons/fa";
 import * as htmlToImage from "html-to-image";
 
@@ -13,7 +12,9 @@ import {
   fetchTopAlbums,
   fetchUserProfile,
   fetchLikedSongs,
+  fetchFollowingUsers,
 } from "../services/StatifyDataService";
+import { formatNumber } from "../utils/FuncUtils";
 
 interface StatifyDataProps {
   token: string;
@@ -46,6 +47,7 @@ const StatifyData: React.FC<StatifyDataProps> = ({
   const [isDLoading, setIsDLoading] = useState<boolean>(false);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [totalLikedSongs, setTotalLikedSongs] = useState<number | null>(null);
+  const [following, setFollowing] = useState<number | null>(null);
 
   const domEl = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -87,6 +89,12 @@ const StatifyData: React.FC<StatifyDataProps> = ({
       setUserProfile(profileData);
     };
 
+    const fetchFollowingData = async () => {
+      const fetchFollowing = await fetchFollowingUsers(token);
+      setFollowing(fetchFollowing);
+
+    }
+
     const fetchLikedSongsData = async () => {
       const likedSongsCount = await fetchLikedSongs(token);
       setTotalLikedSongs(likedSongsCount);
@@ -97,6 +105,7 @@ const StatifyData: React.FC<StatifyDataProps> = ({
       fetchTopData();
       fetchUserProfileData();
       fetchLikedSongsData();
+      fetchFollowingData();
     }
   }, [token]);
 
@@ -119,7 +128,7 @@ const StatifyData: React.FC<StatifyDataProps> = ({
       }
     }
 
-    return "Eclectic 🎵";
+    return "Electric 🎵";
   };
 
   const getPersonalityFromGenres = (genres: string[]): string => {
@@ -177,14 +186,14 @@ const StatifyData: React.FC<StatifyDataProps> = ({
 
                 <div className="profile-data">
                   <div className="followers-header">
-                    Followers <div className="followers-sd">{followers}</div>
+                    Followers <div className="followers-sd">{formatNumber(Number(followers))}</div>
                   </div>
 
                   <div className="following-header">
                     Following{" "}
                     <div className="following-sd">
                       {" "}
-                      {userProfile?.followers.total}
+                      {formatNumber(Number(following))}
                     </div>
                   </div>
 
@@ -216,10 +225,10 @@ const StatifyData: React.FC<StatifyDataProps> = ({
                     </div>
                   </div>
 
-                  <div className="top-genre">
+                  {/* <div className="top-genre">
                     <div className="top-label">Top Genre</div>
                     <div className="top-value">{genre}</div>
-                  </div>
+                  </div> */}
                   <div className="music-personality">Music Personality</div>
                   <div className="personality-value">{musicPersonality}</div>
 
