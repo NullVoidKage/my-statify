@@ -13,8 +13,7 @@ import { Navbar } from "./components/NavBar";
 import RecentlyPlayedTracks from "./components/RecentlyPlayed";
 import Spinner from "./components/Spinner";
 import StatifyData from "./components/StatifyData";
-import { db } from '@vercel/postgres';
-import { response } from "express";
+import handler from "./components/Page";
 
 function App() {
   const CLIENT_ID = "5b065bd3914a4865a90c0aed3e537510";
@@ -111,6 +110,8 @@ function App() {
     }
   }, [token]);
 
+  
+
   const logout = () => {
     setToken(null);
     setUserName(null);
@@ -160,8 +161,8 @@ function App() {
                   url={url}
                 />
 
-                {/* <RecentlyPlayedTracks token={token} /> */}
-                {/* <TopTracksMenu token={token} /> */}
+                <RecentlyPlayedTracks token={token} />
+                <TopTracksMenu token={token} />
               </>
             )}
           </div>
