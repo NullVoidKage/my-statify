@@ -1,14 +1,10 @@
-const express = require("express");
-const cors = require("cors");
-const nodemailer = require("nodemailer");
+const express = require('express');
+const cors = require('cors');
+const nodemailer = require('nodemailer');
+const { send } = require('micro');
+const microCors = require('micro-cors');
 
 const app = express();
-const allowedOrigins = ["http://localhost:3000", "https://my-statify.vercel.app"];
-
-app.use(express.json());
-app.use(cors({
-  origin: allowedOrigins,
-}));
 
 const contactEmail = nodemailer.createTransport({
   service: "gmail",
@@ -18,15 +14,7 @@ const contactEmail = nodemailer.createTransport({
   },
 });
 
-contactEmail.verify((error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Ready to Send");
-  }
-});
-
-app.post("/contact", (req, res) => {
+app.post("/api/contact", (req, res) => {
   const { name, email, message } = req.body;
   const mail = {
     from: name,
@@ -44,12 +32,6 @@ app.post("/contact", (req, res) => {
       </div>
     `,
   };
-  
-  // Set the appropriate headers to allow requests from the client-side
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader("Access-Control-Allow-Origin", "https://my-statify.vercel.app");
-  res.setHeader("Access-Control-Allow-Methods", "POST");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   contactEmail.sendMail(mail, (error) => {
     if (error) {
@@ -61,4 +43,11 @@ app.post("/contact", (req, res) => {
   });
 });
 
-app.listen(8000, () => console.log("Server Running"));
+const cors = microCors({ allowMethods: ['POST'] });
+
+module.exports = cors((req, res) => {
+  if (req.method === 'OPTIONS') {
+    return send(res, 200, 'ok');
+  }
+  return app(req, res);
+});

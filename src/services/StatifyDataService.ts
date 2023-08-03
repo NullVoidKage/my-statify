@@ -7,7 +7,7 @@ interface Artist {
 
   popularity: string;
   genres: String[];
-  isFollowing: boolean; // Add the isFollowing property
+  isFollowing: boolean; 
 }
 export const fetchWeeklyListening = async (token: string) => {
   try {

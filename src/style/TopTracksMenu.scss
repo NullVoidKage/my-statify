@@ -278,8 +278,8 @@
 }
 
 .artist-name {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
   margin-bottom: 5px;
 }
 
@@ -375,8 +375,8 @@
 }
 
 .track-name {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
   color: #ffffff;
   margin-bottom: 5px;
   white-space: nowrap;
@@ -385,7 +385,7 @@
 }
 
 .track-artists {
-      font-size: 14px;
+      font-size: 13px;
     color: #888888;
   white-space: nowrap;
   overflow: hidden;
@@ -451,6 +451,7 @@
 
 .follow-status{
   font-weight: 700;
+  font-size: 14px;
   color: #1db954;
 }
 

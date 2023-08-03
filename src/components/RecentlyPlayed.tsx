@@ -45,7 +45,6 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
   useEffect(() => {
     fetchRecentlyPlayedTracks();
   }, []);
-
   const fetchRecentlyPlayedTracks = async () => {
     try {
       const { data } = await axios.get(
@@ -55,15 +54,12 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
             Authorization: `Bearer ${token}`,
           },
           params: {
-            limit: 25,
+            limit: 50, // Increase the limit to get more tracks since we're filtering duplicates
           },
         }
       );
-  
-      // Extract track IDs from the fetched data
+
       const trackIds = data.items.map((item: any) => item.track.id);
-  
-      // Check if the tracks are liked
       const { data: likedTracks } = await axios.get(
         "https://api.spotify.com/v1/me/tracks/contains",
         {
@@ -75,16 +71,24 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
           },
         }
       );
-  
-      // Combine the liked status with the track data
-      const recentlyPlayedTracksWithLikedStatus = data.items.map(
-        (item: any, index: number) => ({
+
+      // Filter duplicate tracks
+      const seenTrackIds = new Set<string>();
+      const uniqueRecentlyPlayedTracks = data.items
+        .filter((item: any) => {
+          if (seenTrackIds.has(item.track.id)) {
+            return false;
+          } else {
+            seenTrackIds.add(item.track.id);
+            return true;
+          }
+        })
+        .map((item: any, index: number) => ({
           ...item.track,
           liked: likedTracks[index],
-        })
-      );
-  
-      setRecentTracks(recentlyPlayedTracksWithLikedStatus);
+        }));
+
+      setRecentTracks(uniqueRecentlyPlayedTracks);
     } catch (error) {
       console.log("Error fetching recently played tracks:", error);
     }
