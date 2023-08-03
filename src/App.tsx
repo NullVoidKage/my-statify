@@ -14,11 +14,10 @@ import RecentlyPlayedTracks from "./components/RecentlyPlayed";
 import Spinner from "./components/Spinner";
 import StatifyData from "./components/StatifyData";
 
-
 function App() {
   const CLIENT_ID = "5b065bd3914a4865a90c0aed3e537510";
-  // const REDIRECT_URI = "http://localhost:3000/";
-  const REDIRECT_URI = "https://my-statify.vercel.app/callback";
+  const REDIRECT_URI = "http://localhost:3000/";
+  // const REDIRECT_URI = "https://my-statify.vercel.app/callback";
 
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
@@ -63,9 +62,6 @@ function App() {
     setToken(token || null);
   }, []);
 
- 
- 
-
   useEffect(() => {
     const fetchUserData = async () => {
       setIsLoading(true); // Set loading state to true
@@ -78,7 +74,8 @@ function App() {
           },
         });
 
-        setUserName(data.display_name || data.id);
+        const userName = data.display_name || data.id;
+        setUserName(userName);
         setUserPhoto(data.images[1]?.url || "");
         setFollowers(data.followers.total);
         setCountry(data.country);
@@ -86,8 +83,12 @@ function App() {
         setUrl(data.external_urls.spotify);
         setError(null); // Clear the error state if successful
         setIsLoading(false); // Set loading state to false when the data is fetched successfully
-        if (data.display_name) {
-          document.title = `My Statify - ${data.display_name} Spotify Statistics`;
+        if (userName) {
+          document.title = `My Statify - ${userName} Spotify Statistics`;
+
+          // Call your endpoint to insert the user details
+          const data = await axios.post("https://my-statify.vercel.app/api/insert-user", { SpotifyUserName: userName });
+          console.log(data);
         }
       } catch (error: any) {
         if (error.response && error.response.status === 401) {
@@ -106,11 +107,8 @@ function App() {
 
     if (token) {
       fetchUserData();
-      
     }
   }, [token]);
-
-  
 
   const logout = () => {
     setToken(null);
@@ -161,8 +159,8 @@ function App() {
                   url={url}
                 />
 
-                <RecentlyPlayedTracks token={token} />
-                <TopTracksMenu token={token} />
+                {/* <RecentlyPlayedTracks token={token} />
+                <TopTracksMenu token={token} /> */}
               </>
             )}
           </div>
