@@ -13,7 +13,7 @@ import { Navbar } from "./components/NavBar";
 import RecentlyPlayedTracks from "./components/RecentlyPlayed";
 import Spinner from "./components/Spinner";
 import StatifyData from "./components/StatifyData";
-import handler from "./components/Page";
+// import handler from "./components/Page";
 
 function App() {
   const CLIENT_ID = "5b065bd3914a4865a90c0aed3e537510";
