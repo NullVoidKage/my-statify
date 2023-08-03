@@ -17,8 +17,8 @@ module.exports = cors(async (req, res) => {
   const contactEmail = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: "Gabimarusixtynine@gmail.com", // Replace with your Gmail email address
-      pass: "nevtjxjswbpswmuf", // Replace with your Gmail password
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
     },
   });
 
