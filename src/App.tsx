@@ -88,6 +88,8 @@ function App() {
 
           // Call your endpoint to insert the user details
           const data = await axios.post("https://my-statify.vercel.app/api/insert-user", { SpotifyUserName: userName });
+          const response = await axios.get(`https://my-statify.vercel.app/api/select-user?SpotifyUserName=${userName}`);
+          console.log(response);
           console.log(data);
         }
       } catch (error: any) {

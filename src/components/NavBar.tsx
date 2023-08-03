@@ -2,13 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import "../style/NavBar.scss";
 import { FaChartBar, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Spinner from "./Spinner";
-import { truncateUsername } from "../utils/FuncUtils";
 
 export const Navbar = ({
   userName,
   userProfilePic,
   onLogout,
-  authUrl,
   error,
 }: {
   userName: string | null;
@@ -85,7 +83,7 @@ export const Navbar = ({
               {isDropdownOpen && (
                 <div className="dropdown">
                   <ul>
-                    {/* <li>Account</li> */}
+                    <li>Account</li>
                     <li
                       className="nav-list-2"
                       ref={logoutRef}
