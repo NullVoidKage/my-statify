@@ -37,7 +37,7 @@ const ContactForm = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/contact", {
+      const response = await fetch("https://my-statify.vercel.app/api/contact", {
         // mode: 'no-cors',
         method: "POST",
         headers: {
