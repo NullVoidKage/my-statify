@@ -13,6 +13,7 @@
     "@types/node": "^16.18.37",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "@vercel/node": "^2.15.8",
     "@vercel/postgres": "^0.4.1",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
