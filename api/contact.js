@@ -1,25 +1,31 @@
-const express = require('express');
-const cors = require('cors');
 const nodemailer = require('nodemailer');
-const { send } = require('micro');
 const microCors = require('micro-cors');
 
-const app = express();
+const cors = microCors({ allowMethods: ['POST'] });
 
-const contactEmail = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "Gabimarusixtynine@gmail.com", // Replace with your Gmail email address
-    pass: "nevtjxjswbpswmuf", // Replace with your Gmail password
-  },
-});
+module.exports = cors(async (req, res) => {
+  if (req.method === 'OPTIONS') {
+    return res.status(200).send('ok');
+  }
 
-app.post("/api/contact", (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(405).send('Method Not Allowed');
+  }
+
   const { name, email, message } = req.body;
+
+  const contactEmail = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
+    },
+  });
+
   const mail = {
     from: name,
-    to: "ferwelo.n.bscs@gmail.com",
-    subject: "My Statify - Concern",
+    to: 'ferwelo.n.bscs@gmail.com',
+    subject: 'My Statify - Concern',
     html: `
       <div style="font-family: Arial, sans-serif; background-color: #f2f2f2; padding: 20px;">
         <h2 style="color: #333;">Contact Form Submission</h2>
@@ -36,18 +42,9 @@ app.post("/api/contact", (req, res) => {
   contactEmail.sendMail(mail, (error) => {
     if (error) {
       console.log(error);
-      res.status(500).json({ status: "ERROR" });
+      res.status(500).json({ status: 'ERROR' });
     } else {
-      res.json({ status: "Message Sent" });
+      res.json({ status: 'Message Sent' });
     }
   });
-});
-
-const cors = microCors({ allowMethods: ['POST'] });
-
-module.exports = cors((req, res) => {
-  if (req.method === 'OPTIONS') {
-    return send(res, 200, 'ok');
-  }
-  return app(req, res);
 });
