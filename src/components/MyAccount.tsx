@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 interface MyAccountProps {
   token: string | null;
   userPhoto: string;
+  userName: string | null;
   userId: string | null;
 }
 
-export function MyAccount({ token, userPhoto , userId}: MyAccountProps) {
+export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps) {
   const [data, setData] = useState<any>(null);
   const [statifyData, setStatifyData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +40,7 @@ export function MyAccount({ token, userPhoto , userId}: MyAccountProps) {
 
     const fetchStatifyData = async () => {
       try {
-        const response = await axios.get(`https://my-statify.vercel.app/api/select-user?SpotifyID=${userId}`);
+        const response = await axios.get(`https://my-statify.vercel.app/api/select-user?SpotifyUserName=${userName}&SpotifyUserID=${userId}`);
 
         console.log(response)
         setStatifyData(response);
