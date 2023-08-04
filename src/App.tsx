@@ -87,7 +87,7 @@ function App() {
         setIsLoading(false); // Set loading state to false when the data is fetched successfully
         if (userName) {
           document.title = `My Statify - ${userName} Spotify Statistics`;
-
+          console.log(userId)
           await axios.post("https://my-statify.vercel.app/api/insert-user", {
             SpotifyID: userId,
             SpotifyUserName: userName
