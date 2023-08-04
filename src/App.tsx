@@ -143,7 +143,7 @@ function App() {
   
       <Routes>
         <Route path="/" element={<Home token={token} userName={userName} logout={logout} userPhoto={userPhoto} error={error} isLoading={isLoading} country={country} followers={followers} url={url} authUrl={authUrl} />} />
-        <Route path="/my-account" element={<MyAccount token={token} userPhoto={userPhoto}/> } />
+        <Route path="/my-account" element={<MyAccount token={token} userPhoto={userPhoto} userId={userId}/> } />
       </Routes>
      <Footer />
       {/* Rest of the code */}
