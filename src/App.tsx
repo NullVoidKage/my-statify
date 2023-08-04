@@ -35,6 +35,7 @@ function App() {
   ];
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
+  const [userId, setUserID] = useState<string| null>(null);
   const [country, setCountry] = useState<string | null>(null);
   const [followers, setFollowers] = useState<string | null>(null);
   const [birthdate, setBirthDate] = useState<string | null>(null);
@@ -75,6 +76,7 @@ function App() {
 
         const userName = data.display_name || data.id;
         setUserName(userName);
+        setUserID(data.id);
         setUserPhoto(data.images[1]?.url || "");
         setFollowers(data.followers.total);
         setCountry(data.country);
@@ -85,8 +87,11 @@ function App() {
         if (userName) {
           document.title = `My Statify - ${userName} Spotify Statistics`;
 
-         await axios.post("https://my-statify.vercel.app/api/insert-user", { SpotifyUserName: userName });
-     
+          await axios.post("https://my-statify.vercel.app/api/insert-user", {
+            SpotifyID: userId,
+            SpotifyUserName: userName
+          });
+          
      
         }
       } catch (error: any) {

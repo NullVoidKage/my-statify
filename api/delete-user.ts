@@ -5,18 +5,19 @@ export default async function handler(
   request: VercelRequest,
   response: VercelResponse,
 ) {
-  const { SpotifyUserName } = request.body;
+  const { SpotifyID } = request.body; // Change this line to receive the Spotify ID
 
-  if (!SpotifyUserName) {
-    return response.status(400).json({ error: 'SpotifyUserName is required' });
+  if (!SpotifyID) {
+    return response.status(400).json({ error: 'SpotifyID is required' }); // Change the error message accordingly
   }
 
   try {
     const result = await sql`
       DELETE FROM STATIFY_DB
-      WHERE SpotifyUserName = ${SpotifyUserName};
+      WHERE SpotifyID = ${SpotifyID}; // Change this line to match the Spotify ID
     `;
 
+    // Check the number of affected rows to determine if the deletion was successful
     if (result.rows.length === 0) {
       return response.status(404).json({ message: 'User not found' });
     }

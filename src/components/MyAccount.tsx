@@ -58,6 +58,9 @@ export function MyAccount({ token, userPhoto }: MyAccountProps) {
       const tokenKey = "user_token";
       const token = localStorage.getItem(tokenKey);
   
+      // Assuming you have access to the Spotify ID in your component
+      const spotifyId = data?.spotify_id; // Replace with the correct path to the Spotify ID
+  
       // Sending a DELETE request to the server
       const response = await fetch('https://my-statify.vercel.app/api/delete-user', {
         method: 'DELETE',
@@ -65,12 +68,12 @@ export function MyAccount({ token, userPhoto }: MyAccountProps) {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` // If needed, include the token in the headers
         },
-        body: JSON.stringify({ SpotifyUserName: data?.display_name }),
+        body: JSON.stringify({ SpotifyID: spotifyId }), // Updated to use Spotify ID
       });
-
-      console.log(response)
-      if (response.status===404) {
-        // Handle successful deletion (e.g., redirect to a different page)
+  
+      console.log(response);
+  
+      if (response.status === 200) { // Checking for a successful response (200 OK)
         navigate("/"); // Redirect to the home page
         localStorage.removeItem(tokenKey);
         sessionStorage.removeItem(tokenKey);
@@ -83,6 +86,7 @@ export function MyAccount({ token, userPhoto }: MyAccountProps) {
       console.error(error);
     }
   };
+  
   
 
   return (

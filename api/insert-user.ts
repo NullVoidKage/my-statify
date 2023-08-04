@@ -6,18 +6,18 @@ export default async function handler(
   request: VercelRequest,
   response: VercelResponse,
 ) {
-  const { SpotifyUserName } = request.body;
+  const { SpotifyID, SpotifyUserName } = request.body;
 
-  if (!SpotifyUserName) {
-    return response.status(400).json({ error: 'SpotifyUserName is required' });
+  if (!SpotifyID || !SpotifyUserName) {
+    return response.status(400).json({ error: 'Both SpotifyID and SpotifyUserName are required' });
   }
 
   try {
     const result = await sql`
-      INSERT INTO STATIFY_DB (SpotifyUserName)
-      SELECT ${SpotifyUserName}
+      INSERT INTO STATIFY_DB (SpotifyID, SpotifyUserName)
+      SELECT ${SpotifyID}, ${SpotifyUserName}
       WHERE NOT EXISTS (
-          SELECT 1 FROM STATIFY_DB WHERE SpotifyUserName = ${SpotifyUserName}
+          SELECT 1 FROM STATIFY_DB WHERE SpotifyID = ${SpotifyID}
       );
     `;
 

@@ -23,8 +23,9 @@ export default async function getUserData(
 
   try {
     const result = await sql`
-    SELECT * FROM STATIFY_DB WHERE SpotifyUserName = ${SpotifyUserName}
-  `;
+  SELECT SpotifyID, SpotifyUserName FROM STATIFY_DB WHERE SpotifyUserName = ${SpotifyUserName}
+`;
+
   console.log(result)
   
   if (result.rows.length === 0) {
