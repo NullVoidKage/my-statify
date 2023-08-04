@@ -6,22 +6,22 @@ export default async function getUserData(
   request: VercelRequest,
   response: VercelResponse
 ) {
-  // You can change this to request.body if you send the data in the request body
-  const { SpotifyID } = request.query;
+  // Get the SpotifyUserID from the query parameters
+  const { SpotifyUserID } = request.query;
 
-  if (Array.isArray(SpotifyID)) {
+  if (Array.isArray(SpotifyUserID)) {
     return response
       .status(400)
-      .json({ error: "Only one SpotifyID should be provided" });
+      .json({ error: "Only one SpotifyUserID should be provided" });
   }
 
-  if (!SpotifyID) {
-    return response.status(400).json({ error: "SpotifyID is required" });
+  if (!SpotifyUserID) {
+    return response.status(400).json({ error: "SpotifyUserID is required" });
   }
 
   try {
     const result = await sql`
-      SELECT * FROM STATIFY_DB WHERE SpotifyID = ${SpotifyID}
+      SELECT * FROM STATIFY_DB WHERE SpotifyID = ${SpotifyUserID}
     `;
 
     if (result.rows.length === 0) {
