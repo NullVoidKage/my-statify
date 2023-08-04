@@ -36,22 +36,18 @@ export function MyAccount({ token, userPhoto }: MyAccountProps) {
       setIsLoading(false);
     };
 
-    // const fetchStatifyData = async () => {
-    //   try {
-    //     const response = await axios.get(`https://my-statify.vercel.app/api/select-user?SpotifyUserName=${data?.display_name}`);
-    //     console.log(response)
-    //     setStatifyData(response);
-    //   }
-    //   catch(error: any){
-    //     setError(error.message);
-    //   }
-    // }
+    const fetchStatifyData = async () => {
+      try {
+        const response = await axios.get(`https://my-statify.vercel.app/api/select-user?SpotifyUserName=${data?.display_name}`);
+        console.log(response)
+        setStatifyData(response);
+      }
+      catch(error: any){
+        setError(error.message);
+      }
+    }
+    fetchStatifyData();
 
-    
-  
-
-    // fetchStatifyData();
-    // deleteAccount();
     fetchUserData();
   }, [token]);
 
@@ -71,8 +67,9 @@ export function MyAccount({ token, userPhoto }: MyAccountProps) {
         },
         body: JSON.stringify({ SpotifyUserName: data?.display_name }),
       });
-  
-      if (response.ok) {
+
+      console.log(response)
+      if (response.status===404) {
         // Handle successful deletion (e.g., redirect to a different page)
         navigate("/"); // Redirect to the home page
         localStorage.removeItem(tokenKey);
