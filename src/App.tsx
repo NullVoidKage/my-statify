@@ -7,15 +7,14 @@ import { Footer } from "./components/Footer";
 import { MyStatifyChart } from "./components/MyStatify";
 import { StatifyCard } from "./components/StatifyCard";
 import axios from "axios";
-import { CurrentlyListening } from "./components/CurrentlyListening";
-import TopTracksMenu from "./components/TopTracksMenu";
 import { Navbar } from "./components/NavBar";
-import RecentlyPlayedTracks from "./components/RecentlyPlayed";
 import Spinner from "./components/Spinner";
-import StatifyData from "./components/StatifyData";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {MyAccount} from "./components/MyAccount";
+import Home from "./components/Home";
 
 function App() {
-  const CLIENT_ID = "5b065bd3914a4865a90c0aed3e537510";
+  const CLIENT_ID = process.env.CLIENT_ID;
   // const REDIRECT_URI = "http://localhost:3000/";
   const REDIRECT_URI = "https://my-statify.vercel.app/callback";
 
@@ -86,11 +85,9 @@ function App() {
         if (userName) {
           document.title = `My Statify - ${userName} Spotify Statistics`;
 
-          // Call your endpoint to insert the user details
-          const data = await axios.post("https://my-statify.vercel.app/api/insert-user", { SpotifyUserName: userName });
-          const response = await axios.get(`https://my-statify.vercel.app/api/select-user?SpotifyUserName=${userName}`);
-          console.log(response);
-          console.log(data);
+         await axios.post("https://my-statify.vercel.app/api/insert-user", { SpotifyUserName: userName });
+     
+     
         }
       } catch (error: any) {
         if (error.response && error.response.status === 401) {
@@ -117,6 +114,7 @@ function App() {
     setUserName(null);
     window.localStorage.removeItem("token");
     document.title = `My Statify`;
+    
   };
 
   const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${AUTH_SCOPES.join(
@@ -124,53 +122,27 @@ function App() {
   )}`;
 
   return (
+    // <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <Navbar
+      <Navbar
           userName={userName}
           onLogout={logout}
           userProfilePic={userPhoto}
           authUrl={authUrl}
           error={error}
+          
         />
 
-        <div id="wrap">
-          <div className="login-section">
-            {!token ? (
-              <>
-                <Welcome />
-                <a className="btn-slide" href={authUrl}>
-                  <span className="circle">
-                    <i className="fab fa-spotify"></i>
-                  </span>
-                  <span className="title">Login to Spotify</span>
-                  <span className="title title-hover">Press to login</span>
-                </a>
-                <StatifyCard />
-              </>
-            ) : isLoading ? (
-              <Spinner />
-            ) : (
-              <>
-                <MyStatifyChart
-                  token={token}
-                  userName={userName}
-                  userPhoto={userPhoto}
-                  followers={followers}
-                  country={country}
-                  url={url}
-                />
+  
+      <Routes>
+        <Route path="/" element={<Home token={token} userName={userName} logout={logout} userPhoto={userPhoto} error={error} isLoading={isLoading} country={country} followers={followers} url={url} authUrl={authUrl} />} />
+        <Route path="/my-account" element={<MyAccount token={token} userPhoto={userPhoto}/> } />
+      </Routes>
+     <Footer />
+      {/* Rest of the code */}
 
-                {/* <RecentlyPlayedTracks token={token} />
-                <TopTracksMenu token={token} /> */}
-              </>
-            )}
-          </div>
-        </div>
-
-        <Footer />
-      </header>
     </div>
+    // </BrowserRouter>
   );
 }
 

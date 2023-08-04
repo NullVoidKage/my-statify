@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
 
+.App{
+  background: linear-gradient(to bottom, #2B2730, #000000);
+}
 
 .App-header {
-  min-height: 100vh; /* Adjust the value as needed */
+  // min-height: 100vh; /* Adjust the value as needed */
   background-size: cover;
   overflow: auto;
   display: flex;
@@ -11,7 +14,7 @@
   color: white;
   display: flex;
   gap: 20px; 
-  background: linear-gradient(to bottom, #2B2730, #000000);
+
 }
 
 #wrap {

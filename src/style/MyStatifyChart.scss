@@ -199,7 +199,17 @@
 }
 
 
-
+.my-account{
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+  @media (max-width: 768px) {
+    justify-content: center
+  }
+  svg{
+    color: #1ed760;
+  }
+}
 @media (max-width: 768px) {
   // .parentDiv {
   //   padding-top: 65px;

@@ -2,25 +2,30 @@ import React, { useState, useRef, useEffect } from "react";
 import "../style/NavBar.scss";
 import { FaChartBar, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Spinner from "./Spinner";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Navbar = ({
   userName,
   userProfilePic,
   onLogout,
   error,
+
 }: {
   userName: string | null;
   userProfilePic: string | null;
   onLogout: () => void;
   authUrl: string;
   error: string | null;
+
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false); // State variable for logout action
   const dropdownRef = useRef<HTMLDivElement>(null);
   const logoutRef = useRef<HTMLLIElement>(null);
+  const navigate = useNavigate();
 
   const handleToggleDropdown = () => {
+    
     setIsDropdownOpen((prevIsDropdownOpen) => !prevIsDropdownOpen);
   };
 
@@ -38,6 +43,8 @@ export const Navbar = ({
     setIsLoggingOut(true); // Set the logging out state to true
     setTimeout(() => {
       setIsLoggingOut(false); // Reset the logging out state after 2 seconds
+      navigate("/"); // Redirect to the home page
+
       onLogout(); // Call the logout function passed as props
     }, 2000);
   };
@@ -50,30 +57,33 @@ export const Navbar = ({
     };
   }, []);
 
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-brand">
-          <a className="title" href="/spotichart">
+          <a className="title" href="/">
             My Stat <div className="ify">ify</div>
           </a>
           <FaChartBar />
         </div>
 
         <div className="navbar-menu">
-          {userName && !error && (
+          {userName && (
             <div
               className="navbar-user"
-              onClick={handleToggleDropdown}
-              ref={dropdownRef}
+              // onClick={handleToggleDropdown}
+             
             >
               {userProfilePic && (
                 <img className="user-pic" src={userProfilePic} alt="User" />
               )}
+              
             </div>
+            
           )}
-          {userName && !error && (
-            <div className="navbar-user" onClick={handleToggleDropdown}>
+          {userName && (
+            <div className="navbar-user" onClick={handleToggleDropdown}  ref={dropdownRef}>
               <div className="navbar-username">{userName}</div>
               {isDropdownOpen ? (
                 <FaChevronUp className="dropdown-icon" />
@@ -83,7 +93,9 @@ export const Navbar = ({
               {isDropdownOpen && (
                 <div className="dropdown">
                   <ul>
-                    <li>Account</li>
+                  
+                    <li onClick={() => navigate("/my-account")}>My Account</li>
+
                     <li
                       className="nav-list-2"
                       ref={logoutRef}

@@ -2,8 +2,7 @@
 
 .navbar {
   // background-color: #2b2730;
-  // padding: 10px 20px;
-  // color: white;
+  padding-top: 2px
 }
 .nav-list-2{
   font-weight: 500;
@@ -110,7 +109,7 @@
     padding: 8px 0;
     min-width: 120px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    z-index: 99999;
 
     &::before {
       content: "";

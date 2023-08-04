@@ -1,12 +1,13 @@
 import "../style/MyStatifyChart.scss";
-import { FaCamera } from "react-icons/fa";
+
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import * as htmlToImage from "html-to-image";
-import { FaSpotify } from "react-icons/fa";
+import { FaSpotify, FaUserCircle } from "react-icons/fa";
 import { CurrentlyListening } from "./CurrentlyListening";
 import StatifyData from "./StatifyData";
 import { fetchLikedSongs } from "../services/StatifyDataService";
+import { MyAccount } from "./MyAccount";
 interface MyStatifyProps {
   token: string;
   userName: string | null;
@@ -302,6 +303,7 @@ export function MyStatifyChart({
                 </span>
                 <div className="country-value">{country} </div>
               </div>
+             
 
               <div className={`bottom-section`}>
                 <div className="spotify-myspotichart">Open Spotify</div>
@@ -317,6 +319,7 @@ export function MyStatifyChart({
                   }}
                 />
               </div>
+              
               <div>
                 <StatifyData
                   token={token}
@@ -326,6 +329,11 @@ export function MyStatifyChart({
                   country={country}
                 />
               </div>
+          
+              <div>
+           
+              </div>
+           
             </h2>
           </figcaption>
         </figure>
