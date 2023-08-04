@@ -16,7 +16,7 @@ import Home from "./components/Home";
 function App() {
   const CLIENT_ID = '5b065bd3914a4865a90c0aed3e537510';
   // const REDIRECT_URI = "http://localhost:3000/";
-  const REDIRECT_URI = "https://my-statify.vercel.app/callback";
+  const REDIRECT_URI = "https://my-statify.vercel.app/";
 
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";

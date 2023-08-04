@@ -58,20 +58,25 @@ export function MyAccount({ token, userPhoto }: MyAccountProps) {
 
   const deleteAccount = async () => {
     try {
+      // Define the token key used in local and session storage
+      const tokenKey = "user_token";
+      const token = localStorage.getItem(tokenKey);
+  
       // Sending a DELETE request to the server
       const response = await fetch('https://my-statify.vercel.app/api/delete-user', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // If needed, include the token in the headers
+        },
         body: JSON.stringify({ SpotifyUserName: data?.display_name }),
       });
-
+  
       if (response.ok) {
         // Handle successful deletion (e.g., redirect to a different page)
         navigate("/"); // Redirect to the home page
-        if (token) {
-          localStorage.removeItem(token);
-          sessionStorage.removeItem(token);
-        }
+        localStorage.removeItem(tokenKey);
+        sessionStorage.removeItem(tokenKey);
         console.log("Account deleted successfully");
       } else {
         setError("An error occurred while deleting the account.");
@@ -81,6 +86,7 @@ export function MyAccount({ token, userPhoto }: MyAccountProps) {
       console.error(error);
     }
   };
+  
 
   return (
     <div className="my-account-app">
@@ -116,7 +122,7 @@ export function MyAccount({ token, userPhoto }: MyAccountProps) {
       
          <div className="modal-buttons">
            <button className="btn-cancel" onClick={() => setShowDeleteModal(false)}>Cancel</button>
-           <button  onClick={()=>deleteAccount()}>
+           <button  onClick={deleteAccount}>
              Delete Account
            </button>
          </div>
