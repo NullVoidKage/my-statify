@@ -42,8 +42,8 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
       try {
         const response = await axios.get(`https://my-statify.vercel.app/api/select-user?SpotifyUserID=${userId}`);
 
-        console.log(response)
-        setStatifyData(response);
+        console.log(response.data)
+        setStatifyData(response.data);
       }
       catch(error: any){
         setError(error.message);
