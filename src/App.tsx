@@ -75,9 +75,10 @@ function App() {
         });
 
         const userName = data.display_name || data.id;
+        const spotID = data.id; 
         console.log(data)
         setUserName(userName);
-        setUserID(data.id);
+        setUserID(spotID);
         setUserPhoto(data.images[1]?.url || "");
         setFollowers(data.followers.total);
         setCountry(data.country);
@@ -89,7 +90,7 @@ function App() {
           document.title = `My Statify - ${userName} Spotify Statistics`;
           console.log(userId)
           await axios.post("https://my-statify.vercel.app/api/insert-user", {
-            SpotifyID: userId,
+            SpotifyID: spotID,
             SpotifyUserName: userName
           });
           
