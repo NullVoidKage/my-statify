@@ -90,6 +90,15 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
     }
   };
   
+  const formatDate = (dateString: any) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const day = date.getDate();
+    const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return `${month} ${day}, ${year} ${time}`;
+  };
+
   
 
   return (
@@ -107,7 +116,7 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
           <div className='welcome-user'>Welcome, {data?.display_name}</div>
           <div className='account1'>Spotify ID: {data?.id}</div>
           <div className='account1'>Statify ID: {statifyData?.id}</div>
-          <div className='account1'>Created At: {statifyData?.createdAt}</div>
+          <div className='account1'>Created At: {formatDate(statifyData?.createdat)}</div>
           <div className='delete-button' >Delete statify account <FaTrash onClick={() => setShowDeleteModal(true)}/></div>
         </div>
       )}
