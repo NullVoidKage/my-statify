@@ -75,6 +75,7 @@ function App() {
         });
 
         const userName = data.display_name || data.id;
+        console.log(data)
         setUserName(userName);
         setUserID(data.id);
         setUserPhoto(data.images[1]?.url || "");
