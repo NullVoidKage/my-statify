@@ -63,7 +63,8 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
   
       // Assuming you have access to the Spotify ID in your component
       const spotifyId = userId // Replace with the correct path to the Spotify ID
-  
+
+      console.log(spotifyId + ' spotifyId')
       // Sending a DELETE request to the server
       const response = await fetch('https://my-statify.vercel.app/api/delete-user', {
         method: 'DELETE',
