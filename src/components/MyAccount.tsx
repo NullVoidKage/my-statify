@@ -59,7 +59,8 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
     try {
       // Send a DELETE request to the Vercel API endpoint for deleting the user
       const response = await axios.delete(`https://my-statify.vercel.app/api/delete-user?SpotifyUserID=${userId}`);
-  
+
+      console.log(userId)
       console.log(response);
   
       if (response.status === 200) {

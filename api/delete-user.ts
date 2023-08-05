@@ -5,16 +5,16 @@ export default async function handler(
   request: VercelRequest,
   response: VercelResponse,
 ) {
-  const { SpotifyID } = request.body; // Change this line to receive the Spotify ID
+  const { SpotifyUserID } = request.body; // Change this line to receive the Spotify ID
 
-  if (!SpotifyID) {
+  if (!SpotifyUserID) {
     return response.status(400).json({ error: 'SpotifyID is required' }); // Change the error message accordingly
   }
 
   try {
     const result = await sql`
       DELETE FROM STATIFY_DB
-      WHERE SpotifyID = ${SpotifyID}; // Change this line to match the Spotify ID
+      WHERE SpotifyID = ${SpotifyUserID}; // Change this line to match the Spotify ID
     `;
 
     // Check the number of affected rows to determine if the deletion was successful
