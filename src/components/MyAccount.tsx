@@ -57,36 +57,18 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
 
   const deleteAccount = async () => {
     try {
-      // Define the token key used in local and session storage
-      const tokenKey = "user_token";
-      const token = localStorage.getItem(tokenKey);
-  
-      // Assuming you have access to the Spotify ID in your component
-      const spotifyId = userId // Replace with the correct path to the Spotify ID
-
-      console.log(spotifyId + ' spotifyId')
-      // Sending a DELETE request to the server
-      const response = await fetch('https://my-statify.vercel.app/api/delete-user', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // If needed, include the token in the headers
-        },
-        body: JSON.stringify({ SpotifyID: spotifyId }), // Updated to use Spotify ID
-      });
+      // Send a DELETE request to the Vercel API endpoint for deleting the user
+      const response = await axios.delete(`https://my-statify.vercel.app/api/delete-user?SpotifyUserID=${userId}`);
   
       console.log(response);
   
-      if (response.status === 200) { // Checking for a successful response (200 OK)
-        navigate("/"); // Redirect to the home page
-        localStorage.removeItem(tokenKey);
-        sessionStorage.removeItem(tokenKey);
-        console.log("Account deleted successfully");
+      if (response.status === 200) {
+        console.log('Account deleted successfully');
       } else {
-        setError("An error occurred while deleting the account.");
+        console.error('An error occurred while deleting the account.');
       }
     } catch (error) {
-      setError("An error occurred while deleting the account.");
+      console.error('An error occurred while deleting the account.');
       console.error(error);
     }
   };
