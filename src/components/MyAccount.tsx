@@ -145,12 +145,15 @@ export function MyAccount({
             <div className="are-you-sure">
               Are you sure you want to delete your account completely?
             </div>
+
             <input
               type="text"
               placeholder="Type 'DELETE' to confirm"
               value={confirmInput}
               onChange={(e) => setConfirmInput(e.target.value)}
+              className={confirmInput !== "DELETE" ? "input-error" : ""}
             />
+
             {confirmInput !== "DELETE" && (
               <div className="error-message">
                 Please type 'DELETE' to confirm
@@ -167,6 +170,9 @@ export function MyAccount({
               <button
                 onClick={deleteAccount}
                 disabled={confirmInput !== "DELETE"}
+                className={
+                  confirmInput !== "DELETE" ? "delete-button-disabled" : ""
+                }
               >
                 Delete Account
               </button>

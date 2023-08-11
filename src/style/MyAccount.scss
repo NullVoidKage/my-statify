@@ -137,3 +137,18 @@
     }
   }
   
+
+  .input-error {
+    border: 1px solid red; /* Add red border for input error */
+  }
+  
+  .error-message {
+    color: red; /* Set the color for the error message */
+    margin-top: 5px; /* Add some spacing from the input field */
+  }
+  
+  .delete-button-disabled {
+    background-color: #ccc; /* Change background color for disabled button */
+    cursor: not-allowed; /* Change cursor to indicate the button is disabled */
+  }
+  
