@@ -1,11 +1,6 @@
-// insert-user.ts
-import { VercelRequest, VercelResponse } from '@vercel/node';
-import { sql } from '@vercel/postgres';
+const { sql } = require('@vercel/postgres');
 
-export default async function handler(
-  request: VercelRequest,
-  response: VercelResponse,
-) {
+module.exports = async function handler(request, response) {
   const { SpotifyID, SpotifyUserName } = request.body;
 
   if (!SpotifyID || !SpotifyUserName) {
@@ -25,4 +20,4 @@ export default async function handler(
   } catch (error) {
     return response.status(500).json({ error });
   }
-}
+};
