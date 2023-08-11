@@ -12,7 +12,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ errorMessage }) => {
     <div className="error-container">
       <FaRegSadCry className='error-icon'/>
       <p className="error-message">{errorMessage}</p>
-      <div className="license-icon">Flaticon license</div>
+
     </div>
   );
 };

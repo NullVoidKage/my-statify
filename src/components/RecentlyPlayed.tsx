@@ -59,20 +59,29 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
           },
         }
       );
-
+    
       const trackIds = data.items.map((item: any) => item.track.id);
-      const { data: likedTracks } = await axios.get(
-        "https://api.spotify.com/v1/me/tracks/contains",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            ids: trackIds.join(","),
-          },
-        }
-      );
-
+    
+      let likedTracks: boolean[] = []; // Explicitly define the type as boolean[]
+    
+      try {
+        const likedTracksResponse = await axios.get(
+          "https://api.spotify.com/v1/me/tracks/contains",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            params: {
+              ids: trackIds.join(","),
+            },
+          }
+        );
+    
+        likedTracks = likedTracksResponse.data;
+      } catch (likedTracksError) {
+        console.error("Error fetching liked tracks:", likedTracksError);
+      }
+    
       // Filter duplicate tracks
       const seenTrackIds = new Set<string>();
       const uniqueRecentlyPlayedTracks = data.items
@@ -88,13 +97,15 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
           ...item.track,
           liked: likedTracks[index],
         }));
-
+    
       setRecentTracks(uniqueRecentlyPlayedTracks);
-    } catch (error:any) {
-      setError(error.response)
+    } catch (error: any) {
+      setError(error.response);
       console.log("Error fetching recently played tracks:", error);
     }
-  };
+    
+  }
+
   
 
   const createPlaylist = async () => {
