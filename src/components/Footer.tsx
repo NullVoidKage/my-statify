@@ -1,7 +1,5 @@
-
-
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 import {
   FaChartBar,
@@ -17,12 +15,12 @@ import "../style/Footer.scss";
 
 const ContactForm = () => {
   const [status, setStatus] = useState("Submit");
-  
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setStatus("Sending...");
 
-    const { name, email,message } = e.target.elements;
+    const { name, email, message } = e.target.elements;
     const data = {
       name: name.value,
       email: email.value,
@@ -30,14 +28,17 @@ const ContactForm = () => {
     };
 
     try {
-      const response = await fetch("https://my-statify.vercel.app/api/contact", {
-        // mode: 'no-cors',
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://my-statify.vercel.app/api/contact",
+        {
+          // mode: 'no-cors',
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const result = await response.json();
       if (result.status === "Message Sent") {
@@ -69,15 +70,15 @@ export const Footer = () => {
   const [error, setError] = useState(null);
   useEffect(() => {
     // Make an HTTP GET request to the server
-    axios.get('https://my-statify.vercel.app/api/user-count')
-      .then(response => {
+    axios
+      .get("https://my-statify.vercel.app/api/user-count")
+      .then((response) => {
         setTotalCount(response.data.totalCount);
       })
-      .catch(error => {
+      .catch((error) => {
         setError(error.message);
       });
   }, []);
-
 
   return (
     <div className="footer-parent">
@@ -88,6 +89,10 @@ export const Footer = () => {
             <span>
               <FaChartBar />
             </span>
+            <div className="user-count-footer">
+              <div>User Count</div>
+              <div className="totalCount">{totalCount}</div>
+            </div>
           </h3>
 
           <div className="footer-links">
@@ -105,7 +110,6 @@ export const Footer = () => {
               <a href="/about">About</a>
             </div>
           </div>
-          
 
           <div className="disclaimer">
             This app is not affiliated with Spotify. The use of Spotify's name,
@@ -113,10 +117,6 @@ export const Footer = () => {
             imply endorsement or sponsorship by Spotify.
           </div>
 
-          <div>
-            <div>User Count</div>
-            <div>{totalCount}</div>
-          </div>
           <p className="footer-company-name">My Statify © 2023</p>
           <div className="footer-icons">
             <a href="#">
@@ -146,4 +146,3 @@ export const Footer = () => {
     </div>
   );
 };
-

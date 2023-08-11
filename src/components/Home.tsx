@@ -35,7 +35,7 @@ const Home = ({ token, authUrl, userName, userPhoto, followers, country, url, er
                 <div className="privacy-checkbox">
                   <input type="checkbox" id="privacyCheckbox" checked={isCheckboxChecked} onChange={handleCheckboxChange} />
                   <label htmlFor="privacyCheckbox">
-                    By logging in, you agree to our <Link to="/privacy-policy">Privacy Policy</Link>
+                    By logging in, you agree to our <Link className="privacy-home" to="/privacy-policy">Privacy Policy</Link>
                   </label>
                 </div>
                 <StatifyCard />
