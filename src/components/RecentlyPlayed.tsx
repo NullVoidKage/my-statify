@@ -225,7 +225,7 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
                   <FaCheck className="added-to-queue-icon" />
                 ) : (
                   <FaPlusCircle
-                    className="add-to-queue-icon"
+                    className="plus-circle-icon"
                     onClick={() => handleAddToQueue(track.id)}
                   />
                 )}
