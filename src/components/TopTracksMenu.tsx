@@ -86,28 +86,30 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
       // Extract track IDs from the fetched data
       const trackIds = data.items.map((track: any) => track.id);
     
-      // Check if the tracks are liked
       let likedTracks: boolean[] = [];
+      
+      // Check if there are track IDs before fetching liked tracks
+      if (trackIds.length > 0) {
+        try {
+          const likedTracksResponse = await axios.get("https://api.spotify.com/v1/me/tracks/contains", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            params: {
+              ids: trackIds.join(","), // Pass the track IDs as a comma-separated string
+            },
+          });
     
-      try {
-        const likedTracksResponse = await axios.get("https://api.spotify.com/v1/me/tracks/contains", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            ids: trackIds.join(","), // Pass the track IDs as a comma-separated string
-          },
-        });
-    
-        likedTracks = likedTracksResponse.data;
-      } catch (likedTracksError) {
-        console.error("Error fetching liked tracks:", likedTracksError);
+          likedTracks = likedTracksResponse.data;
+        } catch (likedTracksError) {
+          console.error("Error fetching liked tracks:", likedTracksError);
+        }
       }
     
       // Combine the liked status with the track data
       const tracksWithLikedStatus = data.items.map((track: any, index: number) => ({
         ...track,
-        liked: likedTracks[index],
+        liked: likedTracks[index] || false, // Default to false if likedTracks[index] is undefined
       }));
     
       setTopTracks(tracksWithLikedStatus);
@@ -115,6 +117,7 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
       setError(error.response);
       console.log("Error fetching top tracks:", error);
     }
+    
     
   };
 

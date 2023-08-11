@@ -68,7 +68,7 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
       }
     
       let likedTracks: boolean[] = [];
-    
+      if (trackIds.length > 0) {
       try {
         const likedTracksResponse = await axios.get(
           "https://api.spotify.com/v1/me/tracks/contains",
@@ -86,6 +86,7 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
       } catch (likedTracksError) {
         console.error("Error fetching liked tracks:", likedTracksError);
       }
+    }
     
       // Filter duplicate tracks
       const seenTrackIds = new Set<string>();
