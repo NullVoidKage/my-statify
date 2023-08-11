@@ -1,8 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-
-* {
-  font-family: Roboto;
+.footer-parent{
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 3%;
 }
+
+
 
 .footer-distributed{
 	// background: #444;
@@ -11,8 +13,9 @@
 	width: 100%;
 	font: bold 16px sans-serif;
 	text-align: left;
-	padding: 50px 60px 40px;
+	// padding: 50px 50px 40px;
 	overflow: hidden;
+
 }
 
 section {
@@ -151,6 +154,7 @@ section {
 	padding: 18px;
 	@media (max-width: 768px) {
 		width: 100%;
+
 	}
 }
 
@@ -215,9 +219,7 @@ section {
 
 @media (max-width: 800px) {
 
-	.footer-distributed{
-		padding: 30px;
-	}
+	
 
 	.footer-distributed .footer-left,
 	.footer-distributed .footer-right{
@@ -260,3 +262,5 @@ section {
     margin-bottom: 20px;
     padding-top: 3px;
 }
+
+

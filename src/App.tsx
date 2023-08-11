@@ -12,6 +12,8 @@ import Spinner from "./components/Spinner";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {MyAccount} from "./components/MyAccount";
 import Home from "./components/Home";
+import { PrivacyPolicy } from "./components/PrivacyPolicy";
+import { About } from "./components/AboutUs";
 
 function App() {
   const CLIENT_ID = '5b065bd3914a4865a90c0aed3e537510';
@@ -137,13 +139,17 @@ function App() {
           userProfilePic={userPhoto}
           authUrl={authUrl}
           error={error}
-          
+          token={token}
         />
 
   
       <Routes>
         <Route path="/" element={<Home token={token} userName={userName} logout={logout} userPhoto={userPhoto} error={error} isLoading={isLoading} country={country} followers={followers} url={url} authUrl={authUrl} />} />
         <Route path="/my-account" element={<MyAccount token={token} userPhoto={userPhoto} userId={userId} userName={userName} onLogout={logout}/> } />
+
+
+        <Route path="/privacy-policy" element={<PrivacyPolicy /> } />
+        <Route path="/about" element={<About /> } />
       </Routes>
      <Footer />
       {/* Rest of the code */}

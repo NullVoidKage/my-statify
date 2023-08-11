@@ -73,7 +73,7 @@ const ContactForm = () => {
 
 export const Footer = () => {
   return (
-    <div>
+    <div className="footer-parent">
       <footer className="footer-distributed">
         {/* ... Your existing footer content ... */}
         <div className="footer-left">
@@ -86,17 +86,17 @@ export const Footer = () => {
 
           <div className="footer-links">
             <div>
-              <a href="#">Home</a>
+              <a href="/">Home</a>
             </div>
             <div className="separator"></div>
 
             <div className="p-and-p">
-              <a href="#">Privacy & Policy</a>
+              <a href="/privacy-policy">Privacy & Policy</a>
             </div>
             <div className="separator"></div>
 
             <div className="about">
-              <a href="#">About</a>
+              <a href="/about">About</a>
             </div>
           </div>
 

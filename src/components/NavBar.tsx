@@ -9,6 +9,7 @@ export const Navbar = ({
   userProfilePic,
   onLogout,
   error,
+  token
 
 }: {
   userName: string | null;
@@ -16,7 +17,7 @@ export const Navbar = ({
   onLogout: () => void;
   authUrl: string;
   error: string | null;
-
+  token: string | null;
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false); // State variable for logout action
@@ -44,7 +45,8 @@ export const Navbar = ({
     setTimeout(() => {
       setIsLoggingOut(false); // Reset the logging out state after 2 seconds
       navigate("/"); // Redirect to the home page
-
+      window.localStorage.removeItem(token!);
+      console.log(token)
       onLogout(); // Call the logout function passed as props
     }, 2000);
   };

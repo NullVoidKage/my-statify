@@ -139,7 +139,15 @@
   
 
   .input-error {
-    border: 1px solid red; /* Add red border for input error */
+    font-weight: 700;
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    text-align: center;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
   
   .error-message {
