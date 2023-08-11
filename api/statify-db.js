@@ -1,9 +1,6 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
-import { sql } from '@vercel/postgres';
-export default async function handler(
-  request: VercelRequest,
-  response: VercelResponse,
-) {
+const { sql } = require('@vercel/postgres');
+
+module.exports = async function handler(request, response) {
   try {
     await sql`
       CREATE TABLE IF NOT EXISTS STATIFY_DB (
@@ -18,4 +15,4 @@ export default async function handler(
   } catch (error) {
     return response.status(500).json({ error });
   }
-}
+};

@@ -1,11 +1,6 @@
-// select-user.ts
-import { VercelRequest, VercelResponse } from "@vercel/node";
-import { sql } from "@vercel/postgres";
+const { sql } = require('@vercel/postgres');
 
-export default async function getUserData(
-  request: VercelRequest,
-  response: VercelResponse
-) {
+module.exports = async function getUserData(request, response) {
   // Get the SpotifyUserID from the query parameters
   const { SpotifyUserID } = request.query;
 
@@ -33,4 +28,4 @@ export default async function getUserData(
   } catch (error) {
     return response.status(500).json({ error });
   }
-}
+};
