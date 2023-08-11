@@ -206,4 +206,11 @@ p {
 
 .privacy-checkbox{
   margin-bottom: 20px;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 768px) {
+    font-size: 14px; 
+  }
 }
