@@ -6,7 +6,7 @@ export function About() {
     <div className="about">
       <h2>About my-statify</h2>
       <p>
-        my-statify is a project developed by Nikko Ferwelo, a self-taught
+        My-statify is a project developed by Nikko Ferwelo, a self-taught
         developer passionate about providing users with insightful statistics
         about their Spotify usage.
       </p>

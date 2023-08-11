@@ -89,12 +89,12 @@ export const Footer = () => {
             <span>
               <FaChartBar />
             </span>
-            <div className="user-count-footer">
+           
+          </h3>
+          <div className="user-count-footer">
               <div>User Count</div>
               <div className="totalCount">{totalCount}</div>
             </div>
-          </h3>
-
           <div className="footer-links">
             <div>
               <a href="/">Home</a>
