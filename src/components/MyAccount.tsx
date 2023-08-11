@@ -3,20 +3,23 @@ import axios from 'axios';
 import "../style/MyAccount.scss";
 import { FaTrash } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import Spinner from './Spinner';
 
 interface MyAccountProps {
   token: string | null;
   userPhoto: string;
   userName: string | null;
   userId: string | null;
+  onLogout: () => void;
 }
 
-export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps) {
+export function MyAccount({ token, userPhoto , userId, userName, onLogout}: MyAccountProps) {
   const [data, setData] = useState<any>(null);
   const [statifyData, setStatifyData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false); 
   const navigate = useNavigate();
 
 
@@ -54,6 +57,18 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
     fetchUserData();
   }, [token]);
 
+  const handleLogout = () => {
+    console.log('Called Logout')
+    setIsLoggingOut(true); // Set the logging out state to true
+    setTimeout(() => {
+      setIsLoggingOut(false); // Reset the logging out state after 2 seconds
+      navigate("/"); // Redirect to the home page
+
+      onLogout(); // Call the logout function passed as props
+    }, 2000);
+  };
+
+
 
   const deleteAccount = async () => {
     try {
@@ -64,6 +79,7 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
       console.log(response);
   
       if (response.status === 200) {
+        handleLogout();
         console.log('Account deleted successfully');
       } else {
         console.error('An error occurred while deleting the account.');
@@ -126,6 +142,7 @@ export function MyAccount({ token, userPhoto , userId, userName}: MyAccountProps
        </div>
      </div>
       )}
+         {isLoggingOut && <Spinner />}
     </div>
   );
 }
