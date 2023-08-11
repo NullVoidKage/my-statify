@@ -66,13 +66,13 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
   const fetchTopTracks = async (option: string) => {
     try {
       let timeRange = "short_term"; // Default time range for 4 weeks
-  
+    
       if (option === "6 weeks") {
         timeRange = "medium_term";
       } else if (option === "all time") {
         timeRange = "long_term";
       }
-  
+    
       const { data } = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -82,32 +82,40 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
           limit: 10,
         },
       });
-  
+    
       // Extract track IDs from the fetched data
       const trackIds = data.items.map((track: any) => track.id);
-  
+    
       // Check if the tracks are liked
-      const { data: likedTracks } = await axios.get("https://api.spotify.com/v1/me/tracks/contains", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          ids: trackIds.join(","), // Pass the track IDs as a comma-separated string
-        },
-      });
-  
+      let likedTracks: boolean[] = [];
+    
+      try {
+        const likedTracksResponse = await axios.get("https://api.spotify.com/v1/me/tracks/contains", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            ids: trackIds.join(","), // Pass the track IDs as a comma-separated string
+          },
+        });
+    
+        likedTracks = likedTracksResponse.data;
+      } catch (likedTracksError) {
+        console.error("Error fetching liked tracks:", likedTracksError);
+      }
+    
       // Combine the liked status with the track data
       const tracksWithLikedStatus = data.items.map((track: any, index: number) => ({
         ...track,
         liked: likedTracks[index],
       }));
-
-   
+    
       setTopTracks(tracksWithLikedStatus);
-    } catch (error:any) {
-      setError(error.response)
+    } catch (error: any) {
+      setError(error.response);
       console.log("Error fetching top tracks:", error);
     }
+    
   };
 
   

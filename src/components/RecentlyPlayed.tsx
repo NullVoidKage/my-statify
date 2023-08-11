@@ -62,7 +62,12 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
     
       const trackIds = data.items.map((item: any) => item.track.id);
     
-      let likedTracks: boolean[] = []; // Explicitly define the type as boolean[]
+      if (trackIds.length === 0) {
+        console.log("No recently played tracks available.");
+        return; // Exit the function if no track IDs are available
+      }
+    
+      let likedTracks: boolean[] = [];
     
       try {
         const likedTracksResponse = await axios.get(
@@ -103,6 +108,7 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
       setError(error.response);
       console.log("Error fetching recently played tracks:", error);
     }
+    
     
   }
 
