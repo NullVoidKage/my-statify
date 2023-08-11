@@ -1,7 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "../style/StatifyData.scss";
-import { FaSpotify, FaChartBar, FaShare, FaCameraRetro, FaUser } from "react-icons/fa";
+import {
+  FaSpotify,
+  FaChartBar,
+  FaShare,
+  FaCameraRetro,
+  FaUser,
+} from "react-icons/fa";
 import * as htmlToImage from "html-to-image";
 
 import { genreToPersonalityMap } from "../constants/personality";
@@ -15,6 +21,7 @@ import {
   fetchFollowingUsers,
 } from "../services/StatifyDataService";
 import { formatNumber } from "../utils/FuncUtils";
+import ErrorPage from "./ErrorPage";
 
 interface StatifyDataProps {
   token: string;
@@ -48,7 +55,7 @@ const StatifyData: React.FC<StatifyDataProps> = ({
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [totalLikedSongs, setTotalLikedSongs] = useState<number | null>(null);
   const [following, setFollowing] = useState<number | null>(null);
-
+  const [error, setError] = useState<string | null>(null);
   const domEl = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +69,8 @@ const StatifyData: React.FC<StatifyDataProps> = ({
           setMusicPersonality(personality);
           setGenre(data.genres[0].toUpperCase());
         }
-      } catch (error) {
+      } catch (error: any) {
+        setError(error.response);
         console.log("Error fetching weekly listening:", error);
       }
     };
@@ -79,7 +87,8 @@ const StatifyData: React.FC<StatifyDataProps> = ({
         console.log("Top Track:", topTrack.name);
         console.log("Top Artist:", topArtist.name);
         console.log("Top Album:", topAlbum.name);
-      } catch (error) {
+      } catch (error: any) {
+        setError(error.response);
         console.log("Error fetching data:", error);
       }
     };
@@ -92,8 +101,7 @@ const StatifyData: React.FC<StatifyDataProps> = ({
     const fetchFollowingData = async () => {
       const fetchFollowing = await fetchFollowingUsers(token);
       setFollowing(fetchFollowing);
-
-    }
+    };
 
     const fetchLikedSongsData = async () => {
       const likedSongsCount = await fetchLikedSongs(token);
@@ -165,104 +173,111 @@ const StatifyData: React.FC<StatifyDataProps> = ({
 
   return (
     <div>
-      <div className="statify-parent">
-        <div className="open-modal-button" >
-        Open Profile Card <FaUser onClick={handleModalOpen}/>
-        </div>
-        {isModalOpen && (
-          <div className="modal">
-            <div className="modal-content" ref={domEl}>
-              <span
-                className={`close-button ${isDLoading ? "hidden" : ""}`}
-                onClick={handleModalClose}
-              >
-                &times;
-              </span>
-              <div className="card-container">
-                {userProfilePic && (
-                  <img className="round" src={userProfilePic} alt="user" />
-                )}
-                {userName && <div className="name-sdata">{userName}</div>}
+      {error ? (
+        <ErrorPage errorMessage={error} />
+      ) : (
+        <div className="statify-parent">
+          <div className="open-modal-button">
+            Open Profile Card <FaUser onClick={handleModalOpen} />
+          </div>
+          {isModalOpen && (
+            <div className="modal">
+              <div className="modal-content" ref={domEl}>
+                <span
+                  className={`close-button ${isDLoading ? "hidden" : ""}`}
+                  onClick={handleModalClose}
+                >
+                  &times;
+                </span>
+                <div className="card-container">
+                  {userProfilePic && (
+                    <img className="round" src={userProfilePic} alt="user" />
+                  )}
+                  {userName && <div className="name-sdata">{userName}</div>}
 
-                <div className="profile-data">
-                  <div className="followers-header">
-                    Followers <div className="followers-sd">{formatNumber(Number(followers))}</div>
-                  </div>
+                  <div className="profile-data">
+                    <div className="followers-header">
+                      Followers{" "}
+                      <div className="followers-sd">
+                        {formatNumber(Number(followers))}
+                      </div>
+                    </div>
 
-                  <div className="following-header">
-                    Following{" "}
-                    <div className="following-sd">
-                      {" "}
-                      {formatNumber(Number(following))}
+                    <div className="following-header">
+                      Following{" "}
+                      <div className="following-sd">
+                        {" "}
+                        {formatNumber(Number(following))}
+                      </div>
+                    </div>
+
+                    <div className="country-header">
+                      Country <div className="country-sd">{country}</div>
                     </div>
                   </div>
-
-                  <div className="country-header">
-                    Country <div className="country-sd">{country}</div>
-                  </div>
-                </div>
-                {/* <div className="profile-data-2">
+                  {/* <div className="profile-data-2">
               <div className="followers">
                   <FaHeart/> <div className="followers-value">    {totalLikedSongs}</div>
                 </div>
 
               </div> */}
-                <div className="content-data">
-                  <div className="top-track">
-                    <div className="top-label">Top Track</div>
-                    <div className="top-value">{topTrack}</div>
-                  </div>
-
-                  <div className="top-artist">
-                    <div className="top-label">Top Artist</div>
-                    <div className="top-value">{topArtist}</div>
-                  </div>
-
-                  <div className="top-album">
-                    <div className="top-label">Top Album</div>
-                    <div className="top-value">
-                      {topAlbum} - {topAlbumArtist}
+                  <div className="content-data">
+                    <div className="top-track">
+                      <div className="top-label">Top Track</div>
+                      <div className="top-value">{topTrack}</div>
                     </div>
-                  </div>
 
-                  {/* <div className="top-genre">
+                    <div className="top-artist">
+                      <div className="top-label">Top Artist</div>
+                      <div className="top-value">{topArtist}</div>
+                    </div>
+
+                    <div className="top-album">
+                      <div className="top-label">Top Album</div>
+                      <div className="top-value">
+                        {topAlbum} - {topAlbumArtist}
+                      </div>
+                    </div>
+
+                    {/* <div className="top-genre">
                     <div className="top-label">Top Genre</div>
                     <div className="top-value">{genre}</div>
                   </div> */}
-                  <div className="music-personality">Music Personality</div>
-                  <div className="personality-value">{musicPersonality}</div>
+                    <div className="music-personality">Music Personality</div>
+                    <div className="personality-value">{musicPersonality}</div>
 
-                  <div className="mood">
-                    <div className="w-mood">Weekly Mood</div>
-                    <div className="m-message">{moodMessage}</div>
-                  </div>
+                    <div className="mood">
+                      <div className="w-mood">Weekly Mood</div>
+                      <div className="m-message">{moodMessage}</div>
+                    </div>
 
-                  <div className="icon-container">
-                    <div className="spotify-container">
-                      <FaSpotify />
-                      <div className="spotify-data-icon">
-                        Spotify Statistics
+                    <div className="icon-container">
+                      <div className="spotify-container">
+                        <FaSpotify />
+                        <div className="spotify-data-icon">
+                          Spotify Statistics
+                        </div>
                       </div>
-                    </div>
-                    <div className="chart-container">
-                      <FaChartBar />
-                      <div className="chart-data-icon">my-statify.com</div>
-                    </div>
-                    <div
-                      className={`share-container-data ${
-                        isDLoading ? "hidden" : ""
-                      }`}
-                    >
-                      <FaCameraRetro onClick={downloadImage} />
-                      <div className="share-data-icon">Share to my story</div>
+                      <div className="chart-container">
+                        <FaChartBar />
+                        <div className="chart-data-icon">my-statify.com</div>
+                      </div>
+                      <div
+                        className={`share-container-data ${
+                          isDLoading ? "hidden" : ""
+                        }`}
+                      >
+                        <FaCameraRetro onClick={downloadImage} />
+                        <div className="share-data-icon">Share to my story</div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import axios from "axios";
 import "../style/TopTracksMenu.scss";
 import { FaSpotify, FaPlusCircle, FaCheck, FaRegHeart,FaHeart } from "react-icons/fa";
 import Spinner from "./Spinner";
+import ErrorPage from "./ErrorPage";
 
 interface Track {
   id: string;
@@ -52,6 +53,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
   const [isAddingToQueue, setIsAddingToQueue] = useState<string[]>([]);
   const [isSongPlaying, setIsSongPlaying] = useState(false);
   const [spotifyURL, setSpotifyURL] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     fetchTopTracks(selectedOption);
     fetchTopArtists(selectedOption);
@@ -101,7 +104,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
 
    
       setTopTracks(tracksWithLikedStatus);
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.response)
       console.log("Error fetching top tracks:", error);
     }
   };
@@ -149,7 +153,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
 
       setTopArtists(topArtistsData);
       console.log(topArtistsData);
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.response)
       console.log("Error fetching top artist:", error);
     }
   };
@@ -198,7 +203,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
       );
 
       setTopAlbums(albums);
-    } catch (error) {
+    }catch (error:any) {
+      setError(error.response)
       console.log("Error fetching top albums:", error);
     }
   };
@@ -256,7 +262,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
       );
 
       setTopGenres(sortedGenres);
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.response)
       console.log("Error fetching top genres:", error);
     }
   };
@@ -301,7 +308,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
 
       setIsCreatingPlaylist(false);
       window.location.href = `https://open.spotify.com/playlist/${playlistId}`;
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.response)
       console.log("Error creating playlist:", error);
       setIsCreatingPlaylist(false);
     }
@@ -326,7 +334,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
         setIsSongPlaying(false);
         console.log(data.is_playing);
       }
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.response)
       // setError("Error fetching currently playing track. Please try again.");
       console.log("Error fetching currently playing track:", error);
     }
@@ -357,7 +366,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
       );
 
       console.log("Track added to queue");
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.response)
       console.log("Error adding track to queue:", error);
     } finally {
       setIsAddingToQueue((prevAddingToQueue) =>
@@ -567,6 +577,9 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
   }
 
   return (
+
+    <div>
+      {error?<ErrorPage errorMessage={error}/>:
     <div className="topTracks-parent">
       <ul className="top-tracks-menu">
         <li
@@ -589,6 +602,8 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
         </li>
       </ul>
       {renderContent()}
+    </div>
+}
     </div>
   );
 };

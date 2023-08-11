@@ -8,6 +8,7 @@ import { CurrentlyListening } from "./CurrentlyListening";
 import StatifyData from "./StatifyData";
 import { fetchLikedSongs } from "../services/StatifyDataService";
 import { MyAccount } from "./MyAccount";
+import ErrorPage from "./ErrorPage";
 interface MyStatifyProps {
   token: string;
   userName: string | null;
@@ -265,16 +266,11 @@ export function MyStatifyChart({
 
     setIsDownloading(false); // End download
   };
-  if (isLoading) {
-    return <p>Loading top data...</p>;
-  }
 
-  if (error) {
-    return <p className="error-message">{error}</p>;
-  }
 
   function profileCard() {
     return (
+     
       <div className="card-profile">
         <figure className="snip1336">
           <img src={userPhoto} className="cover-photo" alt="" />
@@ -347,7 +343,7 @@ export function MyStatifyChart({
       className={`parentDiv ${isDownloading ? "is-downloading" : ""}`}
       ref={domEl}
     >
-      {error ? <div className="error-message">{error}</div> : profileCard()}
+      {error ? <ErrorPage errorMessage={error}/>: profileCard()}
     </div>
   );
 }

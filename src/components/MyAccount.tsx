@@ -4,6 +4,7 @@ import "../style/MyAccount.scss";
 import { FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
+import ErrorPage from "./ErrorPage";
 
 interface MyAccountProps {
   token: string | null;
@@ -117,10 +118,8 @@ export function MyAccount({
   return (
     <div className="my-account-app">
       <div className="account-container">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div>Error: {error}</div>
+        {error ? (
+          <ErrorPage errorMessage={error}/>
         ) : (
           // Render your data here
           <div className="account-content">

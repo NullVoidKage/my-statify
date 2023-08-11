@@ -9,6 +9,7 @@ import {
   FaRegHeart,
 } from "react-icons/fa";
 import "../style/RecentlyPlayed.scss";
+import ErrorPage from "./ErrorPage";
 
 interface Track {
   id: string;
@@ -41,7 +42,7 @@ interface RecentlyPlayedTracksProps {
 const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
   const [recentTracks, setRecentTracks] = useState<Track[]>([]);
   const [showContent, setShowContent] = useState(false);
-
+  const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     fetchRecentlyPlayedTracks();
   }, []);
@@ -89,7 +90,8 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
         }));
 
       setRecentTracks(uniqueRecentlyPlayedTracks);
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.response)
       console.log("Error fetching recently played tracks:", error);
     }
   };
@@ -125,7 +127,8 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
       );
 
       window.location.href = `https://open.spotify.com/playlist/${playlistId}`;
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.response)
       console.log("Error creating playlist:", error);
     }
   };
@@ -153,11 +156,14 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
         )
       );
       console.log("Track added to queue");
-    } catch (error) {
+    }catch (error:any) {
+      setError(error.response)
       console.log("Error adding track to queue:", error);
     }
   };
   return (
+    <div>
+       {error ? <ErrorPage errorMessage={error}/> : ''}
     <div className="recent-tracks-container">
       <div className="recent-tracks-header" onClick={handleToggleContent}>
         {showContent ? (
@@ -217,7 +223,9 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
         </div>
       )}
     </div>
+    </div>
   );
+  
 };
 
 export default RecentlyPlayedTracks;

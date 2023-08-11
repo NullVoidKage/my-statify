@@ -15,6 +15,7 @@ const Home = ({ token, authUrl, userName, userPhoto, followers, country, url, er
     setIsCheckboxChecked(!isCheckboxChecked);
   };
   return (
+    
     <div className="App">
       <header className="App-header">
         <div id="wrap">
