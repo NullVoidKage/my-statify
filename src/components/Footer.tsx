@@ -1,6 +1,8 @@
 
 
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
+
 import {
   FaChartBar,
   FaFacebook,
@@ -15,16 +17,7 @@ import "../style/Footer.scss";
 
 const ContactForm = () => {
   const [status, setStatus] = useState("Submit");
-  // useEffect(() => {
-  //   // Call the ProfileStatify function when the component mounts
-  //   ProfileStatify()
-  //     .then((response) => {
-  //       console.log(response); // Log the response from the database operation
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error executing ProfileStatify:", error);
-  //     });
-  // }, []);
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setStatus("Sending...");
@@ -72,10 +65,23 @@ const ContactForm = () => {
 };
 
 export const Footer = () => {
+  const [totalCount, setTotalCount] = useState(null);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    // Make an HTTP GET request to the server
+    axios.get('https://my-statify.vercel.app/api/user-count')
+      .then(response => {
+        setTotalCount(response.data.totalCount);
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+  }, []);
+
+
   return (
     <div className="footer-parent">
       <footer className="footer-distributed">
-        {/* ... Your existing footer content ... */}
         <div className="footer-left">
           <h3>
             My Statify
@@ -99,11 +105,17 @@ export const Footer = () => {
               <a href="/about">About</a>
             </div>
           </div>
+          
 
           <div className="disclaimer">
             This app is not affiliated with Spotify. The use of Spotify's name,
             logo, and trademarks is for descriptive purposes only and does not
             imply endorsement or sponsorship by Spotify.
+          </div>
+
+          <div>
+            <div>User Count</div>
+            <div>{totalCount}</div>
           </div>
           <p className="footer-company-name">My Statify © 2023</p>
           <div className="footer-icons">
