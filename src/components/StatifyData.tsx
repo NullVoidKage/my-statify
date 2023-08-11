@@ -190,9 +190,9 @@ const StatifyData: React.FC<StatifyDataProps> = ({
                   &times;
                 </span>
                 <div className="card-container">
-                  {userProfilePic && (
+                  {userProfilePic ? (
                     <img className="round" src={userProfilePic} alt="user" />
-                  )}
+                  ): <img className="round" src="https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png" alt="user"/>}
                   {userName && <div className="name-sdata">{userName}</div>}
 
                   <div className="profile-data">
