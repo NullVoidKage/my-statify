@@ -41,32 +41,34 @@ export function MyAccount({
             },
           }
         );
-
+  
         setData(spotifyData);
       } catch (err: any) {
         setError(err.message);
       }
-
+  
       setIsLoading(false);
     };
-
+  
     const fetchStatifyData = async () => {
       try {
-        const response = await axios.get(
-          `https://my-statify.vercel.app/api/select-user?SpotifyUserID=${userId}`
-        );
-
-        console.log(response.data);
-        setStatifyData(response.data);
+        if (userId) {
+          const response = await axios.get(
+            `https://my-statify.vercel.app/api/select-user?SpotifyUserID=${userId}`
+          );
+  
+          console.log(response.data);
+          setStatifyData(response.data);
+        }
       } catch (error: any) {
         setError(error.message);
       }
     };
+  
     fetchStatifyData();
-
     fetchUserData();
-  }, [token]);
-
+  }, [token, userId]);
+  
   const handleLogout = () => {
     console.log("Called Logout");
     setIsLoggingOut(true); // Set the logging out state to true
