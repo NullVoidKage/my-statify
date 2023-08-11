@@ -52,9 +52,8 @@ const Home = ({ token, authUrl, userName, userPhoto, followers, country, url, er
                   country={country}
                   url={url}
                 />
-                {/* <RecentlyPlayedTracks token={token} />
-                <TopTracksMenu token={token} /> */}
-                {/* Additional components can be added here */}
+                <RecentlyPlayedTracks token={token} />
+                <TopTracksMenu token={token} />
               </>
             )}
           </div>
