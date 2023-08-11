@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 50vh;
 }
 
 .error-image {
@@ -28,4 +28,11 @@
   a {
     color: #888;
   }
+}
+
+
+.license-icon{
+  font-size: 16px;
+  color: white;
+  font-weight: 300;
 }

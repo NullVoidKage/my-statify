@@ -1,6 +1,7 @@
 import React from "react";
 import headphone from '../../src/imgs/headphone.png';
 import "../style/ErrorPage.scss"; // Import the CSS file
+import { FaRegSadCry } from "react-icons/fa";
 
 interface ErrorPageProps {
   errorMessage: string;
@@ -9,9 +10,9 @@ interface ErrorPageProps {
 const ErrorPage: React.FC<ErrorPageProps> = ({ errorMessage }) => {
   return (
     <div className="error-container">
-      <img src={headphone} alt="Error" className="error-image" />
+      <FaRegSadCry className='error-message'/>
       <p className="error-message">{errorMessage}</p>
-      <p>Flaticon license</p>
+      <div className="license-icon">Flaticon license</div>
     </div>
   );
 };
