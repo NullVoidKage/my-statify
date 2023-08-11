@@ -95,7 +95,7 @@ export const Footer = () => {
             </div>
             <div className="separator"></div>
 
-            <div className="about">
+            <div className="about-us">
               <a href="/about">About</a>
             </div>
           </div>
