@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa";
 import * as htmlToImage from "html-to-image";
 
-import { genreToPersonalityMap } from "../constants/personality";
 import {
   fetchWeeklyListening,
   fetchTopTracks,
@@ -22,6 +21,7 @@ import {
 } from "../services/StatifyDataService";
 import { formatNumber } from "../utils/FuncUtils";
 import ErrorPage from "./ErrorPage";
+import { genreToPersonalityMap } from "../constants/constants";
 
 interface StatifyDataProps {
   token: string;
@@ -178,7 +178,7 @@ const StatifyData: React.FC<StatifyDataProps> = ({
       ) : (
         <div className="statify-parent">
           <div className="open-modal-button">
-            Open Profile Card <FaUser onClick={handleModalOpen} />
+            Open Profile Card <FaUser className="faUser-statifyData" onClick={handleModalOpen} />
           </div>
           {isModalOpen && (
             <div className="modal">

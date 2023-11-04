@@ -3,11 +3,10 @@ import "../style/MyStatifyChart.scss";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import * as htmlToImage from "html-to-image";
-import { FaSpotify, FaUserCircle } from "react-icons/fa";
+import { FaSpotify } from "react-icons/fa";
 import { CurrentlyListening } from "./CurrentlyListening";
 import StatifyData from "./StatifyData";
 import { fetchLikedSongs } from "../services/StatifyDataService";
-import { MyAccount } from "./MyAccount";
 import ErrorPage from "./ErrorPage";
 interface MyStatifyProps {
   token: string;
@@ -77,7 +76,6 @@ export function MyStatifyChart({
         );
 
         const minutesPlayed = response.data.items[0]?.duration_ms / 60000 || 0;
-        // console.log(minutesPlayed);
         setAllTimeMinutesPlayed(minutesPlayed);
       } catch (error) {
         console.error("Error fetching all-time minutes played:", error);
@@ -94,21 +92,13 @@ export function MyStatifyChart({
             },
           }
         );
-
-        // console.log("users");
-        // console.log(response);
         const followingUsers = response.data.artists.items.map(
           (user: { id: string; name: string }) => ({
             id: user.id,
             name: user.name,
           })
         );
-
-        // console.log("users");
-        // console.log(followingUsers);
-
         const followingCount = response.data.artists.total; // Get the total count of following users
-        // console.log("Following Count:", followingCount);
         return followingCount;
       } catch (error) {
         console.error("Error fetching following users:", error);
@@ -162,12 +152,9 @@ export function MyStatifyChart({
         const topArtistData: string | null = artistResponse.data.items[0]
           ? artistResponse.data.items[0].name
           : null;
-        // console.log(topArtistData);
-        // console.log(topSong?.images[0].url);
-
+      
         const topArtistImage: string =
           artistResponse.data.items[0].images[1].url;
-        // console.log(topArtistImage);
         const artistIds = artistResponse.data.items
           .map((artist: any) => artist.id)
           .join(",");
@@ -183,7 +170,6 @@ export function MyStatifyChart({
         const genres = genreResponse.data.artists
           .flatMap((artist: any) => artist.genres)
           .filter((genre: string) => genre !== "[]");
-        // console.log(genreResponse.data.artists);
         const genreCountMap: { [key: string]: number } = {};
         genres.forEach((genre: string) => {
           genreCountMap[genre] = (genreCountMap[genre] || 0) + 1;
@@ -308,8 +294,6 @@ export function MyStatifyChart({
                   onClick={(e) => {
                     e.preventDefault();
                     if (url) {
-                      console.log(url);
-
                       window.location.href = url;
                     }
                   }}

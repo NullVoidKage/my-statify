@@ -31,7 +31,7 @@
 .snip1336 img {
   max-width: 100%;
   vertical-align: top;
-  border: 5px solid;
+  border: 3px solid #1ED760;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -423,12 +423,6 @@
   display: flex;
 }
 
-// .personality-value {
-//   color: #1ed760;
-//   font-weight: 700;
-// }
-
-
 
 .statify-card {
   font-size: 12px;
@@ -453,9 +447,13 @@
   display: none;
 }
 .spotify-profile {
-  color: #1ed760;
+  // color: #1ed760;
   cursor: pointer;
    padding-left: 5px;
+}
+
+.spotify-profile:hover{
+  color: #1ed760;
 }
 
 

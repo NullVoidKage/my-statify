@@ -398,7 +398,7 @@
   padding-top: 8px;
 }
 
-.add-to-queue-icon,
+.add-to-queue-icon-topTracks,
 .spotify-icon {
   font-size: 20px;
   margin-left: 5px;
@@ -408,8 +408,8 @@
   
 }
 
-.added-to-queue-icon {
-  font-size: 24px;
+.added-to-queue-icon-check {
+  font-size: 20px;
   margin-right: 5px;
   color: #1db954;
   vertical-align: middle;
@@ -417,16 +417,9 @@
 }
 
 
-.add-to-queue-icon {
-  font-size: 24px;
-  margin-right: 5px;
-  color: #1db954;
-  padding-left: 5px;
-  cursor: pointer;
-}
 
 .spotify-icon {
-  font-size: 18px;
+  font-size: 20px;
   color: #1db954;
   margin-left: 3px;
   cursor: pointer;
