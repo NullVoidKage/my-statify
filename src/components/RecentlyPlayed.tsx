@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import "../style/RecentlyPlayed.scss";
 import ErrorPage from "./ErrorPage";
+import { SPOTIFY_URLS } from "../constants/constants";
 
 interface Track {
   id: string;
@@ -49,7 +50,7 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
   const fetchRecentlyPlayedTracks = async () => {
     try {
       const { data } = await axios.get(
-        "https://api.spotify.com/v1/me/player/recently-played",
+        `${SPOTIFY_URLS}recently-played`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -63,7 +64,6 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
       const trackIds = data.items.map((item: any) => item.track.id);
     
       if (trackIds.length === 0) {
-        console.log("No recently played tracks available.");
         return; // Exit the function if no track IDs are available
       }
     
@@ -158,7 +158,7 @@ const RecentlyPlayedTracks = ({ token }: RecentlyPlayedTracksProps) => {
   const handleAddToQueue = async (trackId: string) => {
     try {
       await axios.post(
-        `https://api.spotify.com/v1/me/player/queue?uri=${encodeURIComponent(
+        `${SPOTIFY_URLS}queue?uri=${encodeURIComponent(
           `spotify:track:${trackId}`
         )}`,
         null,

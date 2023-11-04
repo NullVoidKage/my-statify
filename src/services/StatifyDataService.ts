@@ -102,7 +102,6 @@ export const fetchTopAlbums = async (option: string, token: string) => {
       );
 
       const album = albumData.items[0];
-      console.log(album);
 
       // Get the first artist and image from the album
       if (album && album.artists.length > 0 && album.images.length > 0) {
@@ -119,7 +118,6 @@ export const fetchTopAlbums = async (option: string, token: string) => {
 
     // Filter out any null values and get the first album from the resulting array
     const topAlbum = albums.find((album) => album !== null);
-    console.log(topAlbum);
     return topAlbum;
   } catch (error) {
     console.log("Error fetching top albums:", error);
@@ -180,8 +178,7 @@ export const fetchFollowingUsers = async (token: string) => {
       }
     );
 
-    // console.log("users");
-    // console.log(response);
+  
     const followingUsers = response.data.artists.items.map(
       (user: { id: string; name: string }) => ({
         id: user.id,
@@ -189,11 +186,7 @@ export const fetchFollowingUsers = async (token: string) => {
       })
     );
 
-    // console.log("users");
-    // console.log(followingUsers);
-
     const followingCount = response.data.artists.total; // Get the total count of following users
-    // console.log("Following Count:", followingCount);
     return followingCount;
   } catch (error) {
     console.error("Error fetching following users:", error);

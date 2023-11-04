@@ -11,7 +11,7 @@ import {
   FaGithub,
 } from "react-icons/fa";
 import "../style/Footer.scss";
-// import ProfileStatify from "./statify-profile";
+import { STATIFY_URL } from "../constants/constants";
 
 const ContactForm = () => {
   const [status, setStatus] = useState("Submit");
@@ -29,7 +29,7 @@ const ContactForm = () => {
 
     try {
       const response = await fetch(
-        "https://my-statify.vercel.app/api/contact",
+        `${STATIFY_URL}contact`,
         {
           // mode: 'no-cors',
           method: "POST",
@@ -71,7 +71,7 @@ export const Footer = () => {
   useEffect(() => {
     // Make an HTTP GET request to the server
     axios
-      .get("https://my-statify.vercel.app/api/user-count")
+      .get(`${STATIFY_URL}user-count`)
       .then((response) => {
         setTotalCount(response.data.totalCount);
       })

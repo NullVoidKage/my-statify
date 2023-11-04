@@ -4,6 +4,7 @@ import "../style/TopTracksMenu.scss";
 import { FaSpotify, FaPlusCircle, FaCheck, FaRegHeart,FaHeart } from "react-icons/fa";
 import Spinner from "./Spinner";
 import ErrorPage from "./ErrorPage";
+import { SPOTIFY_URLS } from "../constants/constants";
 
 interface Track {
   id: string;
@@ -163,7 +164,6 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
       );
 
       setTopArtists(topArtistsData);
-      console.log(topArtistsData);
     } catch (error:any) {
       setError(error.response)
       console.log("Error fetching top artist:", error);
@@ -329,7 +329,7 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
   const fetchCurrentlyPlaying = async () => {
     try {
       const { data } = await axios.get(
-        "https://api.spotify.com/v1/me/player/currently-playing",
+        `${SPOTIFY_URLS}currently-playing`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -337,17 +337,13 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
           },
         }
       );
-      console.log(data);
       if (data.is_playing === true) {
         setIsSongPlaying(true);
-        console.log(data.is_playing);
       } else {
         setIsSongPlaying(false);
-        console.log(data.is_playing);
       }
     } catch (error:any) {
       setError(error.response)
-      // setError("Error fetching currently playing track. Please try again.");
       console.log("Error fetching currently playing track:", error);
     }
   };
@@ -359,7 +355,7 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
       ]);
 
       await axios.post(
-        `https://api.spotify.com/v1/me/player/queue?uri=${encodeURIComponent(
+        `${SPOTIFY_URLS}queue?uri=${encodeURIComponent(
           `spotify:track:${trackId}`
         )}`,
         null,
@@ -429,16 +425,16 @@ const TopTracksMenu = ({ token }: TopTracksProps) => {
                     isAddingToQueue.includes(track.id) && isSongPlaying ? (
                       <>
                         {track.addedToQueue ? (
-                          <FaCheck className="added-to-queue-icon" />
+                          <FaCheck className="added-to-queue-icon-check" />
                         ) : null}
                       </>
                     ) : (
                       <>
                         {track.addedToQueue ? (
-                          <FaCheck className="added-to-queue-icon" />
+                          <FaCheck className="added-to-queue-icon-check" />
                         ) : (
                           <FaPlusCircle
-                            className="add-to-queue-icon"
+                            className="add-to-queue-icon-topTracks"
                             onClick={() => handleAddToQueue(track.id)}
                           />
                         )}

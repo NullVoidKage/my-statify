@@ -1,48 +1,45 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 
-
 .card-container {
   // padding-top: 30px;
   position: relative;
   width: 350px;
   max-width: 100%;
   text-align: center;
-
 }
 
-
-.profile-data{
+.profile-data {
   display: flex;
   justify-content: center;
-  .followers-header{
+  .followers-header {
     display: flex;
     align-items: center;
     font-weight: 200;
     justify-content: center;
     font-size: 15px;
-    .followers-sd{
-      color: white;
-      font-weight: 700;
+    .followers-sd {
+      font-weight: 600;
+      color: #1db954;
       font-size: 15px;
       padding-left: 3px;
     }
   }
 
-  .following-header{
+  .following-header {
     display: flex;
     align-items: center;
     font-weight: 200;
     justify-content: center;
     padding-left: 4px;
     font-size: 15px;
-    .following-sd{
-      color: white;
-      font-weight: 700;
+    .following-sd {
+      font-weight: 600;
+      color: #1db954;
       font-size: 15px;
       padding-left: 3px;
     }
   }
-  .country-header{
+  .country-header {
     padding-left: 4px;
     display: flex;
     font-weight: 200;
@@ -50,14 +47,12 @@
     align-items: center;
     font-size: 15px;
     .country-sd {
-      color: white;
-      font-weight: 700;
+      font-weight: 600;
+      color: #1db954;
       font-size: 15px;
       padding-left: 3px;
     }
   }
-
- 
 }
 
 .card-container .pro {
@@ -138,8 +133,8 @@ button.primary.ghost {
 
 .personality-value {
   font-size: 13px;
-  // color: #888888;
-  font-weight: 200;
+  font-weight: 600;
+  color: #1db954;
 }
 .mood {
   padding-top: 10px;
@@ -151,9 +146,8 @@ button.primary.ghost {
 }
 .m-message {
   font-size: 13px;
-  font-weight: 200;
-
-  // color: #888888;
+  font-weight: 600;
+  color: #1db954;
 }
 
 .open-modal-button {
@@ -166,10 +160,13 @@ button.primary.ghost {
     justify-content: center;
   }
   color: #ffffff;
-  svg{
-    color: #1db954;
+  svg {
+    // color: #1db954;
     cursor: pointer;
     padding-left: 4px;
+  }
+  svg:hover {
+    color: #1db954;
   }
 }
 
@@ -195,15 +192,13 @@ button.primary.ghost {
   padding: 20px;
   border-radius: 8px;
   position: relative;
-  span{
+  span {
     cursor: pointer;
   }
 }
 
-
-
 @media (max-width: 768px) {
-  .modal-content{
+  .modal-content {
     background-color: #1c1c1c;
     bottom: 0;
     color: #fff;
@@ -212,7 +207,6 @@ button.primary.ghost {
     width: 300px;
     text-align: center;
   }
-  
 }
 
 .close-button {
@@ -250,7 +244,8 @@ button.primary.ghost {
 
 .top-value {
   font-size: 13px;
-  font-weight: 200;
+  font-weight: 600;
+  color: #1db954;
 }
 
 .top-label {
@@ -295,13 +290,13 @@ button.primary.ghost {
 .chart-container {
   display: flex;
   margin-top: 4px;
-align-items: center;
+  align-items: center;
   svg {
     color: #1db954;
   }
 }
 
-.close-button.hidden{
+.close-button.hidden {
   display: none;
 }
 .chart-data-icon {
@@ -316,7 +311,7 @@ align-items: center;
   color: #1db954;
   align-items: center;
 
-  svg{
+  svg {
     cursor: pointer;
   }
 
@@ -328,7 +323,6 @@ align-items: center;
   }
 }
 
-
-.share-container-data.hidden{
+.share-container-data.hidden {
   display: none;
 }

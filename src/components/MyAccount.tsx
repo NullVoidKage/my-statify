@@ -5,6 +5,7 @@ import { FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 import ErrorPage from "./ErrorPage";
+import { STATIFY_URL } from "../constants/constants";
 
 interface MyAccountProps {
   token: string | null;
@@ -55,10 +56,9 @@ export function MyAccount({
       try {
         if (userId) {
           const response = await axios.get(
-            `https://my-statify.vercel.app/api/select-user?SpotifyUserID=${userId}`
+            `${STATIFY_URL}select-user?SpotifyUserID=${userId}`
           );
   
-          console.log(response.data);
           setStatifyData(response.data);
         }
       } catch (error: any) {
@@ -71,7 +71,6 @@ export function MyAccount({
   }, [token, userId]);
   
   const handleLogout = () => {
-    console.log("Called Logout");
     setIsLoggingOut(true); // Set the logging out state to true
     setTimeout(() => {
       setIsLoggingOut(false); // Reset the logging out state after 2 seconds
@@ -85,11 +84,8 @@ export function MyAccount({
     try {
       // Send a DELETE request to the Vercel API endpoint for deleting the user
       const response = await axios.delete(
-        `https://my-statify.vercel.app/api/delete-user?SpotifyUserID=${userId}`
+        `${STATIFY_URL}delete-user?SpotifyUserID=${userId}`
       );
-
-      console.log(userId);
-      console.log(response);
 
       if (response.status === 200) {
         handleLogout();

@@ -21,3 +21,30 @@ export const genreToPersonalityMap: { [genre: string]: string } = {
       "Independent, artistic, and unconventional. Indie music lovers are known for their independent thinking and creative spirit. They appreciate unique and alternative music styles and often have an artistic inclination.",
   };
   
+
+export const AUTH_SCOPES = [
+  "user-read-private",
+  "user-read-currently-playing",
+  "user-top-read",
+  "user-follow-read",
+  "user-read-recently-played",
+  "user-read-playback-state",
+  "user-read-email",
+  "playlist-modify-public",
+  "user-modify-playback-state",
+  "playlist-modify-private",
+  "user-library-read",
+];
+
+export const SPOTIFY_CREDS = 
+  {
+    CLIENT_ID: '5b065bd3914a4865a90c0aed3e537510',
+    REDIRECT_URI_LOCAL: 'http://localhost:3000/',
+    REDIRECT_URI_PROD: 'https://my-statify.vercel.app/',
+    AUTH_ENDPOINT: 'https://accounts.spotify.com/authorize',
+    RESPONSE_TYPE: 'token'
+  }
+
+export const SPOTIFY_URLS = 'https://api.spotify.com/v1/me/player/';
+
+export const STATIFY_URL = 'https://my-statify.vercel.app/api/';

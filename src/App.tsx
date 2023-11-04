@@ -2,39 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 import "./App.scss";
-import Welcome from "./components/Welcome";
 import { Footer } from "./components/Footer";
-import { MyStatifyChart } from "./components/MyStatify";
-import { StatifyCard } from "./components/StatifyCard";
 import axios from "axios";
 import { Navbar } from "./components/NavBar";
-import Spinner from "./components/Spinner";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import {MyAccount} from "./components/MyAccount";
 import Home from "./components/Home";
 import { PrivacyPolicy } from "./components/PrivacyPolicy";
 import { About } from "./components/AboutUs";
+import { AUTH_SCOPES, SPOTIFY_CREDS, STATIFY_URL } from "./constants/constants";
+
 
 function App() {
-  const CLIENT_ID = '5b065bd3914a4865a90c0aed3e537510';
-  // const REDIRECT_URI = "http://localhost:3000/";
-  const REDIRECT_URI = "https://my-statify.vercel.app/";
+  const isLocalEnvironment = process.env.REACT_APP_ENV === 'local';
 
-  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const RESPONSE_TYPE = "token";
-  const AUTH_SCOPES = [
-    "user-read-private",
-    "user-read-currently-playing",
-    "user-top-read",
-    "user-follow-read",
-    "user-read-recently-played",
-    "user-read-playback-state",
-    "user-read-email",
-    "playlist-modify-public",
-    "user-modify-playback-state",
-    "playlist-modify-private",
-    "user-library-read",
-  ];
+
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const [userId, setUserID] = useState<string| null>(null);
@@ -49,20 +31,23 @@ function App() {
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
-
+  
     if (!token && hash) {
       token = hash
         .substring(1)
         .split("&")
         .find((elem) => elem.startsWith("access_token"))
         ?.split("=")[1]!;
-
+  
       window.location.hash = "";
       window.localStorage.setItem("token", token || "");
+      // Redirect back to the home page after successful login
+      window.location.href = SPOTIFY_CREDS.REDIRECT_URI_LOCAL; // Update this with your actual home page URL
     }
-
+  
     setToken(token || null);
   }, []);
+  
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -78,7 +63,6 @@ function App() {
 
         const userName = data.display_name || data.id;
         const spotID = data.id; 
-        console.log(data)
         setUserName(userName);
         setUserID(spotID);
         setUserPhoto(data.images[1]?.url || "");
@@ -90,8 +74,7 @@ function App() {
         setIsLoading(false); // Set loading state to false when the data is fetched successfully
         if (userName) {
           document.title = `My Statify - ${userName} Spotify Statistics`;
-          console.log(userId)
-          await axios.post("https://my-statify.vercel.app/api/insert-user", {
+          await axios.post(`${STATIFY_URL}insert-user`, {
             SpotifyID: spotID,
             SpotifyUserName: userName
           });
@@ -126,9 +109,8 @@ function App() {
     
   };
 
-  const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${AUTH_SCOPES.join(
-    "%20"
-  )}`;
+  const authUrl = `${SPOTIFY_CREDS.AUTH_ENDPOINT}?client_id=${SPOTIFY_CREDS.CLIENT_ID}&redirect_uri=${isLocalEnvironment ? SPOTIFY_CREDS.REDIRECT_URI_LOCAL : SPOTIFY_CREDS.REDIRECT_URI_PROD}&response_type=${SPOTIFY_CREDS.RESPONSE_TYPE}&scope=${AUTH_SCOPES.join("%20")}`;
+
 
   return (
     // <BrowserRouter>

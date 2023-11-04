@@ -5,16 +5,15 @@ import NowPlaying from "./NowPlaying";
 import * as htmlToImage from "html-to-image";
 import {
   FaSpotify,
-  FaCamera,
   FaPlay,
   FaPause,
   FaStepForward,
   FaStepBackward,
 } from "react-icons/fa";
+import { SPOTIFY_URLS } from "../constants/constants";
 
 interface CurrentlyPlaying {
   id: string; // Add the id property
-
   name: string;
   artist: string;
   album: string;
@@ -43,7 +42,7 @@ export function CurrentlyListening({ token }: CurrentlyListeningProps) {
   
     try {
       const { data } = await axios.get(
-        "https://api.spotify.com/v1/me/player/currently-playing",
+        `${SPOTIFY_URLS}currently-playing`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -82,7 +81,7 @@ export function CurrentlyListening({ token }: CurrentlyListeningProps) {
 
   const nextSong = async () => {
     try {
-      await axios.post("https://api.spotify.com/v1/me/player/next", null, {
+      await axios.post(`${SPOTIFY_URLS}next`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -98,7 +97,7 @@ export function CurrentlyListening({ token }: CurrentlyListeningProps) {
 
   const previousSong = async () => {
     try {
-      await axios.post("https://api.spotify.com/v1/me/player/previous", null, {
+      await axios.post(`${SPOTIFY_URLS}previous`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -112,7 +111,7 @@ export function CurrentlyListening({ token }: CurrentlyListeningProps) {
 
   const stopSong = async () => {
     try {
-      await axios.put("https://api.spotify.com/v1/me/player/pause", null, {
+      await axios.put(`${SPOTIFY_URLS}pause`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -126,7 +125,7 @@ export function CurrentlyListening({ token }: CurrentlyListeningProps) {
 
   const playSong = async () => {
     try {
-      await axios.put("https://api.spotify.com/v1/me/player/play", null, {
+      await axios.put(`${SPOTIFY_URLS}play`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -213,12 +212,17 @@ export function CurrentlyListening({ token }: CurrentlyListeningProps) {
                 </div>
               </div>
               <div className="icons-container">
-                <FaSpotify className="spotify-icon-recently" />
-                <FaCamera
-                  className={`fiCamera-playing ${
-                    isDownloading ? "hidden" : ""
-                  }`}
-                  onClick={downloadImage}
+              <FaSpotify
+                  className="spotify-icon-recently"
+                  onClick={() => {
+                    if (currentlyPlaying) {
+                      window.open(
+                        `https://open.spotify.com/track/${currentlyPlaying.id}`,
+                        "_blank",
+                        "noopener noreferrer"
+                      );
+                    }
+                  }}
                 />
              
               </div>
@@ -239,4 +243,16 @@ export function CurrentlyListening({ token }: CurrentlyListeningProps) {
       </div>
     </div>
   );
+
+  function currentlyPlayingTrack(){
+    return (
+      <div>
+        <div className="pt-parentDiv">
+          <div>
+            <FaSpotify/>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
