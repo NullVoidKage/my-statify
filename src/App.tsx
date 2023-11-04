@@ -108,8 +108,8 @@ function App() {
     document.title = `My Statify`;
     
   };
-
-  const authUrl = `${SPOTIFY_CREDS.AUTH_ENDPOINT}?client_id=${SPOTIFY_CREDS.CLIENT_ID}&redirect_uri=${isLocalEnvironment ? SPOTIFY_CREDS.REDIRECT_URI_LOCAL : SPOTIFY_CREDS.REDIRECT_URI_PROD}&response_type=${SPOTIFY_CREDS.RESPONSE_TYPE}&scope=${AUTH_SCOPES.join("%20")}`;
+//isLocalEnvironment ? SPOTIFY_CREDS.REDIRECT_URI_LOCAL : 
+  const authUrl = `${SPOTIFY_CREDS.AUTH_ENDPOINT}?client_id=${SPOTIFY_CREDS.CLIENT_ID}&redirect_uri=${SPOTIFY_CREDS.REDIRECT_URI_PROD}&response_type=${SPOTIFY_CREDS.RESPONSE_TYPE}&scope=${AUTH_SCOPES.join("%20")}`;
 
 
   return (
