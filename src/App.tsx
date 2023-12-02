@@ -42,7 +42,7 @@ function App() {
       window.location.hash = "";
       window.localStorage.setItem("token", token || "");
       // Redirect back to the home page after successful login
-      window.location.href = isLocalEnvironment ? SPOTIFY_CREDS.REDIRECT_URI_LOCAL : SPOTIFY_CREDS.REDIRECT_URI_LOCAL; // Update this with your actual home page URL
+      window.location.href = isLocalEnvironment ? SPOTIFY_CREDS.REDIRECT_URI_LOCAL : SPOTIFY_CREDS.REDIRECT_URI_PROD; // Update this with your actual home page URL
     }
   
     setToken(token || null);
