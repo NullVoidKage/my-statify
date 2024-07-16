@@ -46,3 +46,6 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 # my-spotichart
 # my-statify
+
+![image](https://github.com/user-attachments/assets/524b5adb-c87a-48d1-ada1-c533ebad9c76)
+
